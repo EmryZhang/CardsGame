@@ -1,0 +1,15 @@
+library/
+temp/
+.creator/
+profiles/
+build/
+.vscode/
+*.log
+*.swp
+*.swo
+
+node_modules/
+dist/
+out/
+
+.git/
