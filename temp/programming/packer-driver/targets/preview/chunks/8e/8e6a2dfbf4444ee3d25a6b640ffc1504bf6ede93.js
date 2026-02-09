@@ -1,7 +1,7 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Color, Component, instantiate, JsonAsset, Node, Prefab, resources, Sprite, SpriteFrame, GameConfig, _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _crd, ccclass, property, LevelController;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Color, Component, instantiate, Node, Prefab, Sprite, SpriteFrame, tween, Vec3, GameConfig, DataManager, CardUtils, CardView, _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _crd, ccclass, property, LevelController;
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -17,12 +17,20 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
     _reporterNs.report("GameConfig", "../configs/GameConfig", _context.meta, extras);
   }
 
-  function _reportPossibleCrUseOfCardConfig(extras) {
-    _reporterNs.report("CardConfig", "../models/CardData", _context.meta, extras);
+  function _reportPossibleCrUseOfDataManager(extras) {
+    _reporterNs.report("DataManager", "../managers/DataManager", _context.meta, extras);
   }
 
-  function _reportPossibleCrUseOfLevelConfig(extras) {
-    _reporterNs.report("LevelConfig", "../models/CardData", _context.meta, extras);
+  function _reportPossibleCrUseOfCardModel(extras) {
+    _reporterNs.report("CardModel", "../models/CardModel", _context.meta, extras);
+  }
+
+  function _reportPossibleCrUseOfCardUtils(extras) {
+    _reporterNs.report("CardUtils", "../utils/CardUtils", _context.meta, extras);
+  }
+
+  function _reportPossibleCrUseOfCardView(extras) {
+    _reporterNs.report("CardView", "../views/CardView", _context.meta, extras);
   }
 
   return {
@@ -36,21 +44,27 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
       Color = _cc.Color;
       Component = _cc.Component;
       instantiate = _cc.instantiate;
-      JsonAsset = _cc.JsonAsset;
       Node = _cc.Node;
       Prefab = _cc.Prefab;
-      resources = _cc.resources;
       Sprite = _cc.Sprite;
       SpriteFrame = _cc.SpriteFrame;
+      tween = _cc.tween;
+      Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
       GameConfig = _unresolved_2.GameConfig;
+    }, function (_unresolved_3) {
+      DataManager = _unresolved_3.DataManager;
+    }, function (_unresolved_4) {
+      CardUtils = _unresolved_4.CardUtils;
+    }, function (_unresolved_5) {
+      CardView = _unresolved_5.default;
     }],
     execute: function () {
       _crd = true;
 
-      _cclegacy._RF.push({}, "71948O7xMxBMIbTJ/ZPbG/H", "LevelController", undefined);
+      _cclegacy._RF.push({}, "3920e54019JjICAIPmKs/ha", "LevelController", undefined);
 
-      __checkObsolete__(['_decorator', 'Color', 'Component', 'instantiate', 'JsonAsset', 'Node', 'Prefab', 'resources', 'Sprite', 'SpriteFrame']);
+      __checkObsolete__(['_decorator', 'Color', 'Component', 'instantiate', 'Node', 'Prefab', 'Sprite', 'SpriteFrame', 'tween', 'Vec3']);
 
       ({
         ccclass,
@@ -78,10 +92,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           _initializerDefineProperty(this, "smallBlackNumbers", _descriptor7, this);
 
           _initializerDefineProperty(this, "suitSprites", _descriptor8, this);
-
-          this.suitSymbols = ['♣', '♦', '♥', '♠'];
-          this.faceTexts = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-          this.levelConfig = null;
         }
 
         onLoad() {
@@ -91,7 +101,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
             // 1. 初始化配置
             yield _this.initializeConfig(); // 2. 加载关卡
 
-            _this.loadLevelFromFile();
+            yield _this.loadLevel(); // 3. 创建卡牌视图
+
+            _this.createCardsFromData();
           })();
         }
 
@@ -103,60 +115,104 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           })();
         }
 
-        loadLevelFromFile() {
-          resources.load('levels/level_1', JsonAsset, (err, asset) => {
-            if (err) return console.error(err);
-            this.levelConfig = asset.json;
-            this.createCardsFromConfig();
-          });
+        loadLevel() {
+          return _asyncToGenerator(function* () {
+            var success = yield (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+              error: Error()
+            }), DataManager) : DataManager).instance.loadLevel(1);
+
+            if (!success) {
+              console.error('加载关卡失败');
+            }
+          })();
         }
 
-        createCardsFromConfig() {
-          var _this$levelConfig$Pla, _this$levelConfig$Sta, _this$levelConfig$Sta2;
-
-          if (!this.levelConfig || !this.cardPrefab) return;
+        createCardsFromData() {
+          if (!this.cardPrefab) return;
           this.tableArea.removeAllChildren();
           this.handArea.removeAllChildren();
           var layoutConfig = (_crd && GameConfig === void 0 ? (_reportPossibleCrUseOfGameConfig({
             error: Error()
           }), GameConfig) : GameConfig).instance.layoutConfig; // 1. 创建桌面牌
 
-          (_this$levelConfig$Pla = this.levelConfig.Playfield) == null || _this$levelConfig$Pla.forEach((cardConfig, index) => {
-            this.createTableCard(cardConfig, index, layoutConfig);
+          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.tableCards.forEach(cardData => {
+            this.createTableCard(cardData, layoutConfig);
           }); // 2. 创建手牌
 
-          var totalHandCards = ((_this$levelConfig$Sta = this.levelConfig.Stack) == null ? void 0 : _this$levelConfig$Sta.length) || 0;
-          (_this$levelConfig$Sta2 = this.levelConfig.Stack) == null || _this$levelConfig$Sta2.forEach((cardConfig, index) => {
-            this.createHandCard(cardConfig, index, layoutConfig, totalHandCards);
+          var totalHandCards = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.handCards.size;
+          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.handCards.forEach(cardData => {
+            this.createHandCard(cardData, layoutConfig, totalHandCards);
           });
         } // --- 创建桌面牌 ---
 
 
-        createTableCard(config, index, layoutConfig) {
+        createTableCard(cardData, layoutConfig) {
+          console.log('创建桌面牌:', cardData);
           var cardNode = instantiate(this.cardPrefab);
-          this.tableArea.addChild(cardNode);
-          this.setupCardDisplay(cardNode, config, 'table', index); // 读取配置位置
-          // 注意：这里保留了简单的坐标转换，如果你的配置已经是Cocos坐标，可以去掉偏移计算
+          this.tableArea.addChild(cardNode); // 将cardId存储到节点属性上
 
-          var posX = config.Position.x;
-          var posY = config.Position.y; // 简单的向下微调，防止卡牌超出屏幕上边缘
+          cardNode.cardId = cardData.id;
+          console.log('已将cardId存储到节点属性:', cardData.id);
+          this.setupCardDisplay(cardNode, cardData); // 设置点击回调
+
+          var cardView = cardNode.getComponent(_crd && CardView === void 0 ? (_reportPossibleCrUseOfCardView({
+            error: Error()
+          }), CardView) : CardView);
+
+          if (cardView) {
+            cardView.setClickCallback(view => {
+              console.log('点击了桌面卡牌:', view.getCardData());
+              this.onTableCardClick(cardNode);
+            });
+            console.log('桌面卡牌点击回调已设置');
+          } else {
+            console.error('未找到CardView组件！');
+          } // 使用CardModel中的位置
+
+
+          var posX = cardData.position.x;
+          var posY = cardData.position.y; // 简单的向下微调，防止卡牌超出屏幕上边缘
 
           posX = posX - 540;
           posY = posY - 960 + 300;
           cardNode.setPosition(posX, posY, 0);
-          cardNode.setSiblingIndex(index); // 确保渲染顺序
-        } // --- 创建手牌 (核心修改逻辑) ---
+          cardNode.setSiblingIndex(cardData.zIndex); // 确保渲染顺序
+        } // --- 创建手牌 ---
 
 
-        createHandCard(config, index, layoutConfig, totalCards) {
+        createHandCard(cardData, layoutConfig, totalCards) {
+          console.log('创建手牌:', cardData);
           var cardNode = instantiate(this.cardPrefab);
-          this.handArea.addChild(cardNode);
-          this.setupCardDisplay(cardNode, config, 'hand', index);
-          this.setupHandCardPosition(cardNode, index, layoutConfig, totalCards);
-        } // --- 设置手牌位置 (已移除硬编码，改为通用逻辑) ---
+          this.handArea.addChild(cardNode); // 将cardId存储到节点属性上
+
+          cardNode.cardId = cardData.id;
+          console.log('已将cardId存储到节点属性:', cardData.id);
+          this.setupCardDisplay(cardNode, cardData);
+          this.setupHandCardPosition(cardNode, cardData, layoutConfig, totalCards); // 设置点击回调
+
+          var cardView = cardNode.getComponent(_crd && CardView === void 0 ? (_reportPossibleCrUseOfCardView({
+            error: Error()
+          }), CardView) : CardView);
+
+          if (cardView) {
+            cardView.setClickCallback(view => {
+              console.log('点击了手牌:', view.getCardData());
+              this.onHandCardClick(cardNode);
+            });
+            console.log('手牌点击回调已设置');
+          } else {
+            console.error('未找到CardView组件！');
+          }
+        } // --- 设置手牌位置 ---
 
 
-        setupHandCardPosition(cardNode, index, layoutConfig, totalCards) {
+        setupHandCardPosition(cardNode, cardData, layoutConfig, totalCards) {
           var _ref, _handConf$stackStartX, _handConf$stackStartY, _ref2, _handConf$horizontalS, _ref3, _handConf$separateCar, _ref4, _handConf$separateCar2;
 
           // 安全获取配置，如果 layoutConfig 为空，使用后面的默认值 (??) 防止不显示
@@ -169,7 +225,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           var spacingX = (_ref2 = (_handConf$horizontalS = handConf.horizontalSpacing) != null ? _handConf$horizontalS : handConf.stackSpacingX) != null ? _ref2 : 100; // 右侧单张的位置
 
           var separateX = (_ref3 = (_handConf$separateCar = handConf.separateCardX) != null ? _handConf$separateCar : handConf.separateCardX) != null ? _ref3 : 200;
-          var separateY = (_ref4 = (_handConf$separateCar2 = handConf.separateCardY) != null ? _handConf$separateCar2 : handConf.separateCardY) != null ? _ref4 : startY;
+          var separateY = (_ref4 = (_handConf$separateCar2 = handConf.separateCardY) != null ? _handConf$separateCar2 : handConf.separateCardY) != null ? _ref4 : startY; // 获取当前卡牌的索引
+
+          var index = Array.from((_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.handCards.values()).indexOf(cardData);
           var posX = 0;
           var posY = startY;
           var zIndex = index; // --- 核心逻辑：判断是否是最后一张 ---
@@ -193,8 +253,26 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         } // --- 通用显示设置 ---
 
 
-        setupCardDisplay(cardNode, config, area, index) {
-          var isRed = this.isRedSuit(config.CardSuit); // 辅助函数：安全设置图片
+        setupCardDisplay(cardNode, cardData) {
+          var config = cardData.config;
+          var isRed = (_crd && CardUtils === void 0 ? (_reportPossibleCrUseOfCardUtils({
+            error: Error()
+          }), CardUtils) : CardUtils).isRedSuit(config.CardSuit); // 初始化CardView
+
+          var cardView = cardNode.getComponent(_crd && CardView === void 0 ? (_reportPossibleCrUseOfCardView({
+            error: Error()
+          }), CardView) : CardView);
+
+          if (cardView) {
+            var index = Array.from(cardData.currentArea === 'table' ? (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+              error: Error()
+            }), DataManager) : DataManager).instance.gameModel.tableCards.values() : (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+              error: Error()
+            }), DataManager) : DataManager).instance.gameModel.handCards.values()).indexOf(cardData);
+            cardView.init(cardData, index, cardData.currentArea);
+            console.log('CardView初始化完成:', cardData);
+          } // 辅助函数：安全设置图片
+
 
           var setSprite = (name, spriteFrame) => {
             var node = cardNode.getChildByName(name);
@@ -216,21 +294,199 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
             setSprite('suit', this.suitSprites[config.CardSuit]);
           }
 
-          cardNode.name = area + "_" + index + "_" + this.getCardName(config);
-        }
-
-        isRedSuit(suit) {
-          return suit === 1 || suit === 2;
+          cardNode.name = cardData.currentArea + "_" + (_crd && CardUtils === void 0 ? (_reportPossibleCrUseOfCardUtils({
+            error: Error()
+          }), CardUtils) : CardUtils).getCardName(config.CardSuit, config.CardFace);
         }
 
         getNumberSprite(face, isBig, isRed) {
           if (face < 0 || face > 12) return null;
           var arr = isBig ? isRed ? this.bigRedNumbers : this.bigBlackNumbers : isRed ? this.smallRedNumbers : this.smallBlackNumbers;
           return arr[face] || null;
-        }
+        } // --- 游戏操作 ---
 
-        getCardName(config) {
-          return "" + (this.suitSymbols[config.CardSuit] || '?') + (this.faceTexts[config.CardFace] || '?');
+        /**
+         * 处理桌面卡牌点击事件
+         * @param cardNode 卡牌节点
+         */
+
+
+        onTableCardClick(cardNode) {
+          var cardData = this.getCardDataFromNode(cardNode);
+          if (!cardData || cardData.currentArea !== 'table') return; // 将桌面牌从tableArea移动到handArea
+
+          cardNode.setParent(this.handArea); // 更新卡牌数据
+
+          cardData.updateArea('hand'); // 将桌面牌移动到手牌最后一张的位置
+
+          this.moveCardToLastHandPosition(cardNode, cardData);
+        }
+        /**
+         * 处理手牌点击事件
+         * @param cardNode 卡牌节点
+         */
+
+
+        onHandCardClick(cardNode) {
+          var _handCards;
+
+          var cardData = this.getCardDataFromNode(cardNode);
+          if (!cardData || cardData.currentArea !== 'hand') return; // 检查是否是最后一张
+
+          var handCards = Array.from((_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.handCards.values());
+          var isLastCard = ((_handCards = handCards[handCards.length - 1]) == null ? void 0 : _handCards.id) === cardData.id; // 如果不是最后一张，移动到最后一张的位置
+
+          if (!isLastCard) {
+            this.moveCardToLastHandPosition(cardNode, cardData);
+          }
+        }
+        /**
+         * 将卡牌移动到手牌最后一张的位置
+         * @param cardNode 卡牌节点
+         * @param cardData 卡牌数据
+         */
+
+
+        moveCardToLastHandPosition(cardNode, cardData) {
+          var _handConf$separateCar3, _handConf$separateCar4;
+
+          var layoutConfig = (_crd && GameConfig === void 0 ? (_reportPossibleCrUseOfGameConfig({
+            error: Error()
+          }), GameConfig) : GameConfig).instance.layoutConfig;
+          var handConf = layoutConfig == null ? void 0 : layoutConfig.handLayout; // 获取最后一张牌的位置配置（与setupHandCardPosition保持一致）
+
+          var targetX = (_handConf$separateCar3 = handConf == null ? void 0 : handConf.separateCardX) != null ? _handConf$separateCar3 : 200;
+          var targetY = (_handConf$separateCar4 = handConf == null ? void 0 : handConf.separateCardY) != null ? _handConf$separateCar4 : 0; // 打印卡牌信息和目标位置
+
+          var suitName = this.getSuitName(cardData.config.CardSuit);
+          var faceName = this.getFaceName(cardData.config.CardFace);
+          console.log("\u70B9\u51FB\u5361\u724C: " + suitName + faceName);
+          console.log("\u79FB\u52A8\u76EE\u6807\u4F4D\u7F6E: (" + targetX + ", " + targetY + ")"); // 使用tween动画移动卡牌（直接使用配置值，不进行额外调整）
+
+          tween(cardNode).to(0.3, {
+            position: new Vec3(targetX, targetY, 0)
+          }).start(); // 更新卡牌数据的位置
+
+          cardData.updatePosition(targetX, targetY); // 更新层级到最上层
+
+          cardNode.setSiblingIndex(100);
+          cardData.zIndex = 100;
+        }
+        /**
+         * 获取花色名称
+         */
+
+
+        getSuitName(suit) {
+          var suits = ['♠', '♥', '♣', '♦'];
+          return suits[suit] || '?';
+        }
+        /**
+         * 获取牌面名称
+         */
+
+
+        getFaceName(face) {
+          var faces = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+          return faces[face] || '?';
+        }
+        /**
+         * 撤销上一步操作
+         */
+
+
+        onUndoClick() {
+          var success = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.undo();
+
+          if (success) {
+            console.log('撤销成功！'); // 刷新所有卡牌显示
+
+            this.refreshAllCardsDisplay();
+          } else {
+            console.log('无法撤销');
+          }
+        }
+        /**
+         * 从节点获取卡牌数据
+         */
+
+
+        getCardDataFromNode(cardNode) {
+          // 通过节点属性获取卡牌ID
+          console.log('=== getCardDataFromNode 开始 ===');
+          console.log('节点名称:', cardNode.name);
+          console.log('节点完整信息:', cardNode); // 尝试从节点属性中获取cardId
+
+          var cardId = cardNode.cardId;
+          console.log('从节点属性提取的cardId:', cardId);
+
+          if (!cardId) {
+            console.log('节点上没有cardId属性');
+            return undefined;
+          }
+
+          var cardData = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.getCardById(cardId);
+          console.log('获取到的cardData:', cardData);
+          return cardData;
+        }
+        /**
+         * 刷新卡牌显示
+         */
+
+
+        refreshCardDisplay(cardNode, cardData) {
+          this.setupCardDisplay(cardNode, cardData);
+        }
+        /**
+         * 移除手牌最后一张的视图
+         */
+
+
+        removeLastHandCardView() {
+          var lastCard = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.getLastHandCard();
+
+          if (lastCard) {
+            var lastCardNode = this.handArea.getChildByPath(lastCard.id);
+
+            if (lastCardNode) {
+              lastCardNode.removeFromParent();
+            }
+          }
+        }
+        /**
+         * 刷新手牌显示
+         */
+
+
+        refreshHandCardsDisplay() {
+          this.handArea.removeAllChildren();
+          var totalHandCards = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.handCards.size;
+          var layoutConfig = (_crd && GameConfig === void 0 ? (_reportPossibleCrUseOfGameConfig({
+            error: Error()
+          }), GameConfig) : GameConfig).instance.layoutConfig;
+          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).instance.gameModel.handCards.forEach(cardData => {
+            this.createHandCard(cardData, layoutConfig, totalHandCards);
+          });
+        }
+        /**
+         * 刷新所有卡牌显示
+         */
+
+
+        refreshAllCardsDisplay() {
+          this.createCardsFromData();
         }
 
       }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "cardPrefab", [_dec2], {

@@ -1450,7 +1450,7 @@
         "c9465a66-b335-4d5e-b8ee-c6e803183972@f9941"
       ],
       "dependScripts": [
-        "719483bb-c4cc-4130-86d3-27f64f6c6fc7",
+        "3920ee78-d35f-498c-8080-20f98ab3f85a",
         "CC3eba29-7abb-723a-f7ab-ae275e2277e8"
       ]
     },
@@ -3051,7 +3051,9 @@
         "d8ef205f-1de7-4d5c-8088-0dc5bcee2142@f9941",
         "c9465a66-b335-4d5e-b8ee-c6e803183972@f9941"
       ],
-      "dependScripts": []
+      "dependScripts": [
+        "f5cecfc4-dd4f-44d5-99b4-fb918bcac733"
+      ]
     },
     "versionCode": 2
   },
@@ -3091,6 +3093,58 @@
   },
   "141565df-57f9-4de7-a89f-38b73dc51cf8": {
     "url": "db://assets/Classes/models/CardData.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "f5cecfc4-dd4f-44d5-99b4-fb918bcac733": {
+    "url": "db://assets/Classes/views/CardView.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "3920ee78-d35f-498c-8080-20f98ab3f85a": {
+    "url": "db://assets/Classes/controllers/LevelController.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "4c015e12-4dc3-4be4-a7c1-484de1a3cf49": {
+    "url": "db://assets/Classes/managers/DataManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "77cc3524-6694-4822-ad9f-d38d803fdfa0": {
+    "url": "db://assets/Classes/models/RuntimeCardData.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "59ba776e-f08f-490a-b6de-f22a6150f6c6": {
+    "url": "db://assets/Classes/utils/CardUtils.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "4548b4ee-39c1-4dbf-80eb-7eeef0f89e8e": {
+    "url": "db://assets/Classes/README.md",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "1c6383e6-a5ee-4c6a-b82a-9d17d1994834": {
+    "url": "db://assets/Classes/controllers/LevelController_bak.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "e2aa0986-a3d9-43fa-8b2e-125e7ec0d5ec": {
+    "url": "db://assets/Classes/models/CardModel.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "332f9115-63e9-4bb0-b254-c1449ec2a548": {
+    "url": "db://assets/Classes/models/GameModel.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "2f6835c3-6799-460d-9f71-d6b6e8d07a5e": {
+    "url": "db://assets/Classes/models/UndoModel.ts",
     "value": {},
     "versionCode": 1
   }

@@ -17,9 +17,15 @@
             "resources\\levels",
             "Classes\\configs\\GameConfig.ts",
             "Classes\\controllers\\LevelController.ts",
+            "Classes\\controllers\\LevelController_bak.ts",
+            "Classes\\managers\\DataManager.ts",
             "Classes\\models\\CardData.ts",
             "Classes\\models\\LayoutConfig.ts",
+            "Classes\\models\\RuntimeCardData.ts",
+            "Classes\\utils\\CardUtils.ts",
+            "Classes\\views\\CardView.ts",
             "scene.scene",
+            "Classes\\README.md",
             "Prefab\\CardPrefab.prefab",
             "Classes\\configs\\LayoutConfig.json",
             "resources\\configs\\LayoutConfig.json",
@@ -83,7 +89,10 @@
             "resources\\images\\small_red_K.png",
             "resources\\images\\small_red_Q.png",
             "resources\\images\\spade.png",
-            "resources\\levels\\level_1.json"
+            "resources\\levels\\level_1.json",
+            "Classes\\models\\CardModel.ts",
+            "Classes\\models\\GameModel.ts",
+            "Classes\\models\\UndoModel.ts"
         ]
     }
 }

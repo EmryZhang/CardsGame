@@ -26,7 +26,7 @@
       "time": 1770561100719.0425
     },
     "Classes": {
-      "time": 1770621924824.7441,
+      "time": 1770649019669.617,
       "uuid": "69322036-52a8-44cf-916d-4254173b9ff8"
     },
     "Classes\\configs": {
@@ -34,15 +34,15 @@
       "uuid": "add71af2-54fd-4eab-b5d2-c68c18258d9b"
     },
     "Classes\\controllers": {
-      "time": 1770628023961.932,
+      "time": 1770649088981.0886,
       "uuid": "34b8a7f3-2739-472b-bda7-00806eb06f1c"
     },
     "Classes\\managers": {
-      "time": 1770560123985.9668,
+      "time": 1770648128634.5747,
       "uuid": "efcaaaf6-f4b0-469f-b9af-bd7f9e218f64"
     },
     "Classes\\models": {
-      "time": 1770632572463.9294,
+      "time": 1770652005198.2102,
       "uuid": "aa10b64b-c295-487b-b5c2-13b8942815ee"
     },
     "Classes\\services": {
@@ -50,26 +50,26 @@
       "uuid": "41510112-3123-40f5-ad1c-1918ee681bd2"
     },
     "Classes\\utils": {
-      "time": 1770560135129.0793,
+      "time": 1770648128636.5273,
       "uuid": "9ee7d330-9424-4ee6-9115-c9d7e57426c3"
     },
     "Classes\\views": {
-      "time": 1770560113923.8215,
+      "time": 1770646172054.655,
       "uuid": "579dc51c-7c36-46bf-9d8d-e8df8c1b8113"
     },
     "scene.scene": {
-      "time": 1770634176788.271,
+      "time": 1770658016462.0557,
       "uuid": "8875fcb5-f1e7-490e-9881-0b924d2651f2"
     },
     "scene.scene.meta": {
       "time": 1770569766472.522
     },
     "Classes\\controllers\\LevelController.ts.meta": {
-      "time": 1770616687724.9116
+      "time": 1770648128642.4312
     },
     "Classes\\controllers\\LevelController.ts": {
-      "time": 1770634744828.5718,
-      "uuid": "719483bb-c4cc-4130-86d3-27f64f6c6fc7"
+      "time": 1770657816802.3767,
+      "uuid": "3920ee78-d35f-498c-8080-20f98ab3f85a"
     },
     "Prefab.meta": {
       "time": 1770617798450.187
@@ -530,7 +530,7 @@
       "time": 1770625655042.428
     },
     "Prefab\\CardPrefab.prefab": {
-      "time": 1770625655039.0955,
+      "time": 1770651381699.7532,
       "uuid": "e80c6670-a7f6-4eff-aa11-174ff7e57506"
     },
     "Classes\\configs\\GameConfig.ts.meta": {
@@ -544,7 +544,7 @@
       "uuid": "042f69a1-5dc5-4144-afed-bd972ecf5001"
     },
     "Classes\\models\\LayoutConfig.ts": {
-      "time": 1770633340010.693,
+      "time": 1770654429160.4492,
       "uuid": "36d79c61-258f-4749-be23-8127925a5da6"
     },
     "Classes\\configs\\LayoutConfig.json.meta": {
@@ -572,8 +572,71 @@
       "time": 1770628997098.7666
     },
     "Classes\\models\\CardData.ts": {
-      "time": 1770629848345.6428,
+      "time": 1770649933174.611,
       "uuid": "141565df-57f9-4de7-a89f-38b73dc51cf8"
+    },
+    "Classes\\views\\CardView.ts.meta": {
+      "time": 1770646172062.5002
+    },
+    "Classes\\views\\CardView.ts": {
+      "time": 1770652189314.006,
+      "uuid": "f5cecfc4-dd4f-44d5-99b4-fb918bcac733"
+    },
+    "Classes\\managers\\DataManager.ts.meta": {
+      "time": 1770648128643.4104
+    },
+    "Classes\\models\\RuntimeCardData.ts.meta": {
+      "time": 1770648128644.381
+    },
+    "Classes\\utils\\CardUtils.ts.meta": {
+      "time": 1770648128645.3638
+    },
+    "Classes\\managers\\DataManager.ts": {
+      "time": 1770652030099.879,
+      "uuid": "4c015e12-4dc3-4be4-a7c1-484de1a3cf49"
+    },
+    "Classes\\models\\RuntimeCardData.ts": {
+      "time": 1770647460761.6602,
+      "uuid": "77cc3524-6694-4822-ad9f-d38d803fdfa0"
+    },
+    "Classes\\utils\\CardUtils.ts": {
+      "time": 1770651268338.3276,
+      "uuid": "59ba776e-f08f-490a-b6de-f22a6150f6c6"
+    },
+    "Classes\\README.md.meta": {
+      "time": 1770649019684.2979
+    },
+    "Classes\\README.md": {
+      "time": 1770648757971.057,
+      "uuid": "4548b4ee-39c1-4dbf-80eb-7eeef0f89e8e"
+    },
+    "Classes\\controllers\\LevelController_bak.ts.meta": {
+      "time": 1770649097147.3877
+    },
+    "Classes\\controllers\\LevelController_bak.ts": {
+      "time": 1770649983733.759,
+      "uuid": "1c6383e6-a5ee-4c6a-b82a-9d17d1994834"
+    },
+    "Classes\\models\\CardModel.ts.meta": {
+      "time": 1770652005204.3506
+    },
+    "Classes\\models\\GameModel.ts.meta": {
+      "time": 1770652005205.9216
+    },
+    "Classes\\models\\UndoModel.ts.meta": {
+      "time": 1770652005206.9163
+    },
+    "Classes\\models\\CardModel.ts": {
+      "time": 1770651946297.9114,
+      "uuid": "e2aa0986-a3d9-43fa-8b2e-125e7ec0d5ec"
+    },
+    "Classes\\models\\GameModel.ts": {
+      "time": 1770651972400.9592,
+      "uuid": "332f9115-63e9-4bb0-b254-c1449ec2a548"
+    },
+    "Classes\\models\\UndoModel.ts": {
+      "time": 1770651981835.9268,
+      "uuid": "2f6835c3-6799-460d-9f71-d6b6e8d07a5e"
     }
   },
   "missing": {}

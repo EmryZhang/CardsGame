@@ -1,26 +1,26 @@
 // 扑克牌花色
 export enum CardSuit {
-    HEART = 0,    // 红桃
+    CLUB = 0,    // 梅花
     DIAMOND = 1,  // 方块
-    CLUB = 2,     // 梅花
+    HEART = 2,     // 红桃
     SPADE = 3     // 黑桃
 }
 
-// 扑克牌点数（从1开始，对应A-K）
+// 扑克牌点数（从0开始，对应A-K）
 export enum CardFace {
-    ACE = 1,      // A
-    TWO = 2,      // 2
-    THREE = 3,    // 3
-    FOUR = 4,     // 4
-    FIVE = 5,     // 5
-    SIX = 6,      // 6
-    SEVEN = 7,    // 7
-    EIGHT = 8,    // 8
-    NINE = 9,     // 9
-    TEN = 10,     // 10
-    JACK = 11,    // J
-    QUEEN = 12,   // Q
-    KING = 13     // K
+    ACE = 0,      // A
+    TWO = 1,      // 2
+    THREE = 2,    // 3
+    FOUR = 3,     // 4
+    FIVE = 4,     // 5
+    SIX = 5,      // 6
+    SEVEN = 6,    // 7
+    EIGHT = 7,    // 8
+    NINE = 8,     // 9
+    TEN = 9,      // 10
+    JACK = 10,    // J
+    QUEEN = 11,   // Q
+    KING = 12     // K
 }
 
 // 卡牌配置接口

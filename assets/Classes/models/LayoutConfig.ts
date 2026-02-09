@@ -18,8 +18,8 @@ export interface ILayoutConfig {
         mode?: string;         // "stack_last_separate"
         
         // 左侧堆叠组配置
-        startX: number;        // JSON: "startX"
-        startY: number;        // JSON: "startY"
+        stackStartX: number;   // JSON: "stackStartX"
+        stackStartY: number;   // JSON: "stackStartY"
         stackSpacingX: number; // JSON: "stackSpacingX"
         
         // 右侧单独卡牌配置
@@ -41,8 +41,8 @@ export const DEFAULT_LAYOUT_CONFIG: ILayoutConfig = {
     },
     handLayout: {
         mode: "stack_last_separate",
-        startX: -200,
-        startY: -750,
+        stackStartX: -200,
+        stackStartY: -750,
         stackSpacingX: 100,
         separateCardX: 350,
         separateCardY: -750
