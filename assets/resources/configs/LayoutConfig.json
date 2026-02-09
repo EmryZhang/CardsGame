@@ -1,0 +1,29 @@
+{
+    "designWidth": 1080,
+    "designHeight": 2080,
+    "cardWidth": 270,
+    "cardHeight": 180,
+    "tableLayout": {
+        "leftColumnX": -200,
+        "rightColumnX": 200,
+        "startY": 300,
+        "verticalSpacing": 220,
+        "cardsPerColumn": 3
+    },
+    "handLayout": {
+        "startX": -100,
+        "startY": -300,
+        "horizontalSpacing": 120,
+        "totalCards": 3
+    },
+    "reserveLayout": {
+        "startX": -300,
+        "startY": -300,
+        "offsetX": 10,
+        "offsetY": 5
+    },
+    "firstCardLayout": {
+        "x": 300,
+        "y": -300
+    }
+}

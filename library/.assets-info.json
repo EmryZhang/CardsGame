@@ -1,0 +1,580 @@
+{
+  "version": "1.0.1",
+  "map": {
+    "Classes.meta": {
+      "time": 1770561100715.2507
+    },
+    "Classes\\configs.meta": {
+      "time": 1770561100715.2507
+    },
+    "Classes\\controllers.meta": {
+      "time": 1770561100715.2507
+    },
+    "Classes\\managers.meta": {
+      "time": 1770561100715.2507
+    },
+    "Classes\\models.meta": {
+      "time": 1770561100716.6733
+    },
+    "Classes\\services.meta": {
+      "time": 1770561100716.6733
+    },
+    "Classes\\utils.meta": {
+      "time": 1770561100718.0608
+    },
+    "Classes\\views.meta": {
+      "time": 1770561100719.0425
+    },
+    "Classes": {
+      "time": 1770621924824.7441,
+      "uuid": "69322036-52a8-44cf-916d-4254173b9ff8"
+    },
+    "Classes\\configs": {
+      "time": 1770627443528.8806,
+      "uuid": "add71af2-54fd-4eab-b5d2-c68c18258d9b"
+    },
+    "Classes\\controllers": {
+      "time": 1770628023961.932,
+      "uuid": "34b8a7f3-2739-472b-bda7-00806eb06f1c"
+    },
+    "Classes\\managers": {
+      "time": 1770560123985.9668,
+      "uuid": "efcaaaf6-f4b0-469f-b9af-bd7f9e218f64"
+    },
+    "Classes\\models": {
+      "time": 1770632572463.9294,
+      "uuid": "aa10b64b-c295-487b-b5c2-13b8942815ee"
+    },
+    "Classes\\services": {
+      "time": 1770560128624.6658,
+      "uuid": "41510112-3123-40f5-ad1c-1918ee681bd2"
+    },
+    "Classes\\utils": {
+      "time": 1770560135129.0793,
+      "uuid": "9ee7d330-9424-4ee6-9115-c9d7e57426c3"
+    },
+    "Classes\\views": {
+      "time": 1770560113923.8215,
+      "uuid": "579dc51c-7c36-46bf-9d8d-e8df8c1b8113"
+    },
+    "scene.scene": {
+      "time": 1770634176788.271,
+      "uuid": "8875fcb5-f1e7-490e-9881-0b924d2651f2"
+    },
+    "scene.scene.meta": {
+      "time": 1770569766472.522
+    },
+    "Classes\\controllers\\LevelController.ts.meta": {
+      "time": 1770616687724.9116
+    },
+    "Classes\\controllers\\LevelController.ts": {
+      "time": 1770634744828.5718,
+      "uuid": "719483bb-c4cc-4130-86d3-27f64f6c6fc7"
+    },
+    "Prefab.meta": {
+      "time": 1770617798450.187
+    },
+    "Prefab": {
+      "time": 1770625655037.5564,
+      "uuid": "0781c92d-f185-4726-b094-046dce8ecdd6"
+    },
+    "resources.meta": {
+      "time": 1770622099405.9712
+    },
+    "resources\\images.meta": {
+      "time": 1770622099407.9507
+    },
+    "resources\\levels.meta": {
+      "time": 1770622099415.9634
+    },
+    "resources": {
+      "time": 1770627810155.9414,
+      "uuid": "789ccb2b-e7f0-4a94-b4a4-1ea81d8110c9"
+    },
+    "resources\\images": {
+      "time": 1770622099486.6235,
+      "uuid": "ad0b35f1-4a37-4dcf-9746-0d44d248aa08"
+    },
+    "resources\\levels": {
+      "time": 1770622099488.1367,
+      "uuid": "0cef85e5-e133-40df-ae37-1c285712d9d3"
+    },
+    "resources\\images\\big_black_10.png.meta": {
+      "time": 1770622099534.3755
+    },
+    "resources\\images\\big_black_2.png.meta": {
+      "time": 1770622099555.335
+    },
+    "resources\\images\\big_black_3.png.meta": {
+      "time": 1770622099549.8748
+    },
+    "resources\\images\\big_black_4.png.meta": {
+      "time": 1770622099542.912
+    },
+    "resources\\images\\big_black_5.png.meta": {
+      "time": 1770622099541.3975
+    },
+    "resources\\images\\big_black_6.png.meta": {
+      "time": 1770622099585.2922
+    },
+    "resources\\images\\big_black_7.png.meta": {
+      "time": 1770622099592.767
+    },
+    "resources\\images\\big_black_8.png.meta": {
+      "time": 1770622099597.127
+    },
+    "resources\\images\\big_black_9.png.meta": {
+      "time": 1770622099601.2346
+    },
+    "resources\\images\\big_black_A.png.meta": {
+      "time": 1770622099600.2275
+    },
+    "resources\\images\\big_black_J.png.meta": {
+      "time": 1770622099632.3796
+    },
+    "resources\\images\\big_black_K.png.meta": {
+      "time": 1770622099637.898
+    },
+    "resources\\images\\big_black_Q.png.meta": {
+      "time": 1770622099652.396
+    },
+    "resources\\images\\big_red_10.png.meta": {
+      "time": 1770622099645.3047
+    },
+    "resources\\images\\big_red_2.png.meta": {
+      "time": 1770622099647.9248
+    },
+    "resources\\images\\big_red_3.png.meta": {
+      "time": 1770622099685.2166
+    },
+    "resources\\images\\big_red_4.png.meta": {
+      "time": 1770622099692.2673
+    },
+    "resources\\images\\big_red_5.png.meta": {
+      "time": 1770622099705.8345
+    },
+    "resources\\images\\big_red_6.png.meta": {
+      "time": 1770622099699.4546
+    },
+    "resources\\images\\big_red_7.png.meta": {
+      "time": 1770622099712.4324
+    },
+    "resources\\images\\big_red_8.png.meta": {
+      "time": 1770622099751.8525
+    },
+    "resources\\images\\big_red_9.png.meta": {
+      "time": 1770622099747.963
+    },
+    "resources\\images\\big_red_A.png.meta": {
+      "time": 1770622099763.6807
+    },
+    "resources\\images\\big_red_J.png.meta": {
+      "time": 1770622099775.175
+    },
+    "resources\\images\\big_red_K.png.meta": {
+      "time": 1770622099771.2195
+    },
+    "resources\\images\\big_red_Q.png.meta": {
+      "time": 1770622099818.9897
+    },
+    "resources\\images\\CardPrefab.prefab.meta": {
+      "time": 1770622099785.714
+    },
+    "resources\\images\\card_general.png.meta": {
+      "time": 1770622099838.031
+    },
+    "resources\\images\\club.png.meta": {
+      "time": 1770622099843.6018
+    },
+    "resources\\images\\DeskCardArea.png.meta": {
+      "time": 1770622099832.119
+    },
+    "resources\\images\\diamond.png.meta": {
+      "time": 1770622099853.192
+    },
+    "resources\\images\\HandCardArea.png.meta": {
+      "time": 1770622099892.064
+    },
+    "resources\\images\\heart.png.meta": {
+      "time": 1770622099904.616
+    },
+    "resources\\images\\small_black_10.png.meta": {
+      "time": 1770622099918.1738
+    },
+    "resources\\images\\small_black_2.png.meta": {
+      "time": 1770622099913.7334
+    },
+    "resources\\images\\small_black_3.png.meta": {
+      "time": 1770622099931.5789
+    },
+    "resources\\images\\small_black_4.png.meta": {
+      "time": 1770622099970.8892
+    },
+    "resources\\images\\small_black_5.png.meta": {
+      "time": 1770622099986.9976
+    },
+    "resources\\images\\small_black_6.png.meta": {
+      "time": 1770622099993.6277
+    },
+    "resources\\images\\small_black_7.png.meta": {
+      "time": 1770622099996.572
+    },
+    "resources\\images\\small_black_8.png.meta": {
+      "time": 1770622100011.3599
+    },
+    "resources\\images\\small_black_9.png.meta": {
+      "time": 1770622100046.709
+    },
+    "resources\\images\\small_black_A.png.meta": {
+      "time": 1770622100064.253
+    },
+    "resources\\images\\small_black_J.png.meta": {
+      "time": 1770622100072.3196
+    },
+    "resources\\images\\small_black_K.png.meta": {
+      "time": 1770622100068.2075
+    },
+    "resources\\images\\small_black_Q.png.meta": {
+      "time": 1770622100089.1763
+    },
+    "resources\\images\\small_red_10.png.meta": {
+      "time": 1770622100126.609
+    },
+    "resources\\images\\small_red_2.png.meta": {
+      "time": 1770622100138.2576
+    },
+    "resources\\images\\small_red_3.png.meta": {
+      "time": 1770622100146.6296
+    },
+    "resources\\images\\small_red_4.png.meta": {
+      "time": 1770622100151.2805
+    },
+    "resources\\images\\small_red_5.png.meta": {
+      "time": 1770622100163.9724
+    },
+    "resources\\images\\small_red_6.png.meta": {
+      "time": 1770622100205.913
+    },
+    "resources\\images\\small_red_7.png.meta": {
+      "time": 1770622100221.9963
+    },
+    "resources\\images\\small_red_8.png.meta": {
+      "time": 1770622100214.9321
+    },
+    "resources\\images\\small_red_9.png.meta": {
+      "time": 1770622100232.1692
+    },
+    "resources\\images\\small_red_A.png.meta": {
+      "time": 1770622100240.2976
+    },
+    "resources\\images\\small_red_J.png.meta": {
+      "time": 1770622100388.1292
+    },
+    "resources\\images\\small_red_K.png.meta": {
+      "time": 1770622100393.8044
+    },
+    "resources\\images\\small_red_Q.png.meta": {
+      "time": 1770622100385.1628
+    },
+    "resources\\images\\spade.png.meta": {
+      "time": 1770622100397.7527
+    },
+    "resources\\levels\\level_1.json.meta": {
+      "time": 1770622100260.1704
+    },
+    "resources\\images\\big_black_10.png": {
+      "time": 1770556822977.2761,
+      "uuid": "d308c009-689a-4576-a026-1db122eb2b71"
+    },
+    "resources\\images\\big_black_5.png": {
+      "time": 1770556822978.3103,
+      "uuid": "e704ef83-ddd4-41a8-bbb8-6066c6ceec90"
+    },
+    "resources\\images\\big_black_4.png": {
+      "time": 1770556822978.3103,
+      "uuid": "61b4d601-dc03-4514-9d3c-8b73ca1ba876"
+    },
+    "resources\\images\\big_black_3.png": {
+      "time": 1770556822978.3103,
+      "uuid": "ceb31710-6e96-429b-8c30-cc14c58ea3ca"
+    },
+    "resources\\images\\big_black_2.png": {
+      "time": 1770556822977.2761,
+      "uuid": "68e2366a-5760-4dc8-8dd4-ded5095c5e97"
+    },
+    "resources\\images\\big_black_6.png": {
+      "time": 1770556822978.3103,
+      "uuid": "880045e9-c82a-4e7a-a1e1-202356a53c8a"
+    },
+    "resources\\images\\big_black_7.png": {
+      "time": 1770556822979.3103,
+      "uuid": "4a5bc5df-c616-4264-a25a-e499e1b1fadb"
+    },
+    "resources\\images\\big_black_8.png": {
+      "time": 1770556822979.3103,
+      "uuid": "b3c6c105-8143-4916-899c-cf5b509ba3b3"
+    },
+    "resources\\images\\big_black_A.png": {
+      "time": 1770556822979.3103,
+      "uuid": "7a259aeb-8de6-49ad-b451-ede6777bb2f7"
+    },
+    "resources\\images\\big_black_9.png": {
+      "time": 1770556822979.3103,
+      "uuid": "9c08f2a3-9594-4aed-a5ad-b16bf0f4c187"
+    },
+    "resources\\images\\big_black_J.png": {
+      "time": 1770556822980.281,
+      "uuid": "b23747ae-c214-40db-91c7-0d6489938497"
+    },
+    "resources\\images\\big_black_K.png": {
+      "time": 1770556822980.281,
+      "uuid": "7e8e2a64-57d4-41ff-b356-fd531731394e"
+    },
+    "resources\\images\\big_red_10.png": {
+      "time": 1770556822980.281,
+      "uuid": "3468985f-84a7-4acf-9e16-0b04de541050"
+    },
+    "resources\\images\\big_red_2.png": {
+      "time": 1770556822980.281,
+      "uuid": "6acd0de5-0a8f-4ac0-95f4-2030303d0c93"
+    },
+    "resources\\images\\big_black_Q.png": {
+      "time": 1770556822980.281,
+      "uuid": "74f5f599-c8ff-4415-9674-58afca428628"
+    },
+    "resources\\images\\big_red_3.png": {
+      "time": 1770556822981.275,
+      "uuid": "b9764c26-6abe-4b98-8c50-5ce678ddf489"
+    },
+    "resources\\images\\big_red_4.png": {
+      "time": 1770556822981.275,
+      "uuid": "e477a0c2-fe12-418c-9d8c-8de547f586e6"
+    },
+    "resources\\images\\big_red_6.png": {
+      "time": 1770556822981.275,
+      "uuid": "8e5f5d07-f3ad-420b-8d1b-4cc650faa12b"
+    },
+    "resources\\images\\big_red_5.png": {
+      "time": 1770556822981.275,
+      "uuid": "12cec01a-779f-4f94-a56b-3b10cf73553f"
+    },
+    "resources\\images\\big_red_7.png": {
+      "time": 1770556822981.275,
+      "uuid": "8a12e464-014a-49bc-a6e6-124174176483"
+    },
+    "resources\\images\\big_red_9.png": {
+      "time": 1770556822982.2742,
+      "uuid": "a669c17d-0e75-421a-9729-2b73c3536121"
+    },
+    "resources\\images\\big_red_8.png": {
+      "time": 1770556822982.2742,
+      "uuid": "36a4a4c9-5cea-43f9-a785-a6a1c07c02c2"
+    },
+    "resources\\images\\big_red_A.png": {
+      "time": 1770556822982.2742,
+      "uuid": "88dbc151-949d-4d3d-8c5a-c90e0e0be9dd"
+    },
+    "resources\\images\\big_red_K.png": {
+      "time": 1770556822982.2742,
+      "uuid": "8522738d-88da-4bc4-ad75-24df25d788a7"
+    },
+    "resources\\images\\big_red_J.png": {
+      "time": 1770556822982.2742,
+      "uuid": "004ecb93-7c31-4c09-8cc6-7d4b97ec95b3"
+    },
+    "resources\\images\\CardPrefab.prefab": {
+      "time": 1770566452501.5518,
+      "uuid": "647b8dd7-825b-40aa-9b95-7f11f80e371d"
+    },
+    "resources\\images\\big_red_Q.png": {
+      "time": 1770556822983.2747,
+      "uuid": "ea272037-6d41-4b8d-8a53-07b124282e52"
+    },
+    "resources\\images\\DeskCardArea.png": {
+      "time": 1770610233096.472,
+      "uuid": "9f80cc78-22df-4935-9f07-756bdc31c756"
+    },
+    "resources\\images\\card_general.png": {
+      "time": 1770556822977.2761,
+      "uuid": "268cc345-7b4e-4ce2-85f5-454b7142955a"
+    },
+    "resources\\images\\club.png": {
+      "time": 1770556822989.2664,
+      "uuid": "09672b0f-cbab-4e5d-9ebc-756774437bee"
+    },
+    "resources\\images\\diamond.png": {
+      "time": 1770556822989.2664,
+      "uuid": "8149ca33-c547-4b17-9ad7-a5343271cf97"
+    },
+    "resources\\images\\HandCardArea.png": {
+      "time": 1770610239225.8682,
+      "uuid": "ac594f7d-42cf-44ba-b471-5980034640c4"
+    },
+    "resources\\images\\heart.png": {
+      "time": 1770556822990.2666,
+      "uuid": "362e0722-2c9f-406c-8cb6-25d195598667"
+    },
+    "resources\\images\\small_black_2.png": {
+      "time": 1770556822983.2747,
+      "uuid": "d8ef205f-1de7-4d5c-8088-0dc5bcee2142"
+    },
+    "resources\\images\\small_black_10.png": {
+      "time": 1770556822983.2747,
+      "uuid": "7be7054d-3ff7-4147-a83c-6e4b6e0c936c"
+    },
+    "resources\\images\\small_black_3.png": {
+      "time": 1770556822983.2747,
+      "uuid": "5f4bce50-198a-43f5-932f-0769ab7ec46a"
+    },
+    "resources\\images\\small_black_4.png": {
+      "time": 1770556822983.2747,
+      "uuid": "40fd4180-4622-4762-b771-d041defb260a"
+    },
+    "resources\\images\\small_black_5.png": {
+      "time": 1770556822984.4504,
+      "uuid": "f880e963-f9b5-4096-9ee9-216cf5d30bbd"
+    },
+    "resources\\images\\small_black_6.png": {
+      "time": 1770556822984.4504,
+      "uuid": "56b4e723-341d-466a-8837-eab6971e8ba5"
+    },
+    "resources\\images\\small_black_7.png": {
+      "time": 1770556822984.4504,
+      "uuid": "aee26b4f-000f-494e-ad22-e486e1821fd9"
+    },
+    "resources\\images\\small_black_8.png": {
+      "time": 1770556822984.4504,
+      "uuid": "fe844a37-2d8a-49a1-9c3f-970851a30141"
+    },
+    "resources\\images\\small_black_9.png": {
+      "time": 1770556822985.2764,
+      "uuid": "8bfde175-5afd-4590-ba94-b44bf85ac911"
+    },
+    "resources\\images\\small_black_A.png": {
+      "time": 1770556822985.2764,
+      "uuid": "00076e19-282c-49d6-b5a2-fa20294c142b"
+    },
+    "resources\\images\\small_black_K.png": {
+      "time": 1770556822986.2678,
+      "uuid": "3b234b46-1f0f-4afa-9167-289d929a8746"
+    },
+    "resources\\images\\small_black_J.png": {
+      "time": 1770556822985.2764,
+      "uuid": "3f7d1b8b-df48-4aa2-93cf-6b9642861d80"
+    },
+    "resources\\images\\small_black_Q.png": {
+      "time": 1770556822986.2678,
+      "uuid": "695ef013-1596-4a99-8964-fde2a26f76ca"
+    },
+    "resources\\images\\small_red_10.png": {
+      "time": 1770556822986.2678,
+      "uuid": "a2c393ee-f942-4460-9705-bc144f913b0f"
+    },
+    "resources\\images\\small_red_2.png": {
+      "time": 1770556822986.2678,
+      "uuid": "39d12f27-673b-44c2-87e8-b150a652c78b"
+    },
+    "resources\\images\\small_red_3.png": {
+      "time": 1770556822986.2678,
+      "uuid": "b1425af4-82fa-4f93-88ca-28df778bcc4b"
+    },
+    "resources\\images\\small_red_4.png": {
+      "time": 1770556822987.267,
+      "uuid": "9d014701-1f2a-47ee-a8c6-8bbbe856d29e"
+    },
+    "resources\\images\\small_red_5.png": {
+      "time": 1770556822987.267,
+      "uuid": "e055b2f3-6c62-4a93-a645-19743b5d0c02"
+    },
+    "resources\\images\\small_red_6.png": {
+      "time": 1770556822987.267,
+      "uuid": "35873ae6-8b86-4c27-857c-a794e524eb0d"
+    },
+    "resources\\images\\small_red_8.png": {
+      "time": 1770556822988.2668,
+      "uuid": "194544d9-6848-4f24-9c9a-cf2808539521"
+    },
+    "resources\\images\\small_red_7.png": {
+      "time": 1770556822987.267,
+      "uuid": "fcd708ab-361d-411a-8b93-e6fc9f962d98"
+    },
+    "resources\\images\\small_red_9.png": {
+      "time": 1770556822988.2668,
+      "uuid": "959031f8-d9ff-4746-982f-a21b6f0d18ce"
+    },
+    "resources\\images\\small_red_A.png": {
+      "time": 1770556822988.2668,
+      "uuid": "61788383-8a3b-4951-9c14-000a20da1a97"
+    },
+    "resources\\levels\\level_1.json": {
+      "time": 1770561257029.8667,
+      "uuid": "07c8a333-4ec3-4bee-83c7-347f7df21860"
+    },
+    "resources\\images\\small_red_Q.png": {
+      "time": 1770556822989.2664,
+      "uuid": "c32d840b-bfce-4cae-9b6f-69f808090459"
+    },
+    "resources\\images\\small_red_J.png": {
+      "time": 1770556822988.2668,
+      "uuid": "592f7c67-97bf-4621-b8ac-40f05583d863"
+    },
+    "resources\\images\\small_red_K.png": {
+      "time": 1770556822988.2668,
+      "uuid": "af059d58-0ff9-49e9-8e3c-322c1d8ca573"
+    },
+    "resources\\images\\spade.png": {
+      "time": 1770556822990.2666,
+      "uuid": "c9465a66-b335-4d5e-b8ee-c6e803183972"
+    },
+    "Prefab\\CardPrefab.prefab.meta": {
+      "time": 1770625655042.428
+    },
+    "Prefab\\CardPrefab.prefab": {
+      "time": 1770625655039.0955,
+      "uuid": "e80c6670-a7f6-4eff-aa11-174ff7e57506"
+    },
+    "Classes\\configs\\GameConfig.ts.meta": {
+      "time": 1770627443526.889
+    },
+    "Classes\\models\\LayoutConfig.ts.meta": {
+      "time": 1770627443527.901
+    },
+    "Classes\\configs\\GameConfig.ts": {
+      "time": 1770633355443.307,
+      "uuid": "042f69a1-5dc5-4144-afed-bd972ecf5001"
+    },
+    "Classes\\models\\LayoutConfig.ts": {
+      "time": 1770633340010.693,
+      "uuid": "36d79c61-258f-4749-be23-8127925a5da6"
+    },
+    "Classes\\configs\\LayoutConfig.json.meta": {
+      "time": 1770627443548.107
+    },
+    "Classes\\configs\\LayoutConfig.json": {
+      "time": 1770634708455.2585,
+      "uuid": "d65a5110-9e64-4e57-bceb-4febdcc9a2a8"
+    },
+    "resources\\configs.meta": {
+      "time": 1770627810156.9521
+    },
+    "resources\\configs": {
+      "time": 1770627810156.9521,
+      "uuid": "4c5da674-6d0c-408d-8d22-a9faed687386"
+    },
+    "resources\\configs\\LayoutConfig.json.meta": {
+      "time": 1770627810175.6938
+    },
+    "resources\\configs\\LayoutConfig.json": {
+      "time": 1770627780572.2793,
+      "uuid": "f23522a7-16f8-4b5e-9f56-347b4bd779ec"
+    },
+    "Classes\\models\\CardData.ts.meta": {
+      "time": 1770628997098.7666
+    },
+    "Classes\\models\\CardData.ts": {
+      "time": 1770629848345.6428,
+      "uuid": "141565df-57f9-4de7-a89f-38b73dc51cf8"
+    }
+  },
+  "missing": {}
+}

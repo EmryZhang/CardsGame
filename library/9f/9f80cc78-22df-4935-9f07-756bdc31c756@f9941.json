@@ -1,0 +1,90 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "DeskCardArea",
+    "atlas": "",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 123,
+      "height": 141
+    },
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "originalSize": {
+      "width": 123,
+      "height": 141
+    },
+    "rotated": false,
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "vertices": {
+      "rawPosition": [
+        -61.5,
+        -70.5,
+        0,
+        61.5,
+        -70.5,
+        0,
+        -61.5,
+        70.5,
+        0,
+        61.5,
+        70.5,
+        0
+      ],
+      "indexes": [
+        0,
+        1,
+        2,
+        2,
+        1,
+        3
+      ],
+      "uv": [
+        0,
+        141,
+        123,
+        141,
+        0,
+        0,
+        123,
+        0
+      ],
+      "nuv": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "minPos": {
+        "x": -61.5,
+        "y": -70.5,
+        "z": 0
+      },
+      "maxPos": {
+        "x": 61.5,
+        "y": 70.5,
+        "z": 0
+      }
+    },
+    "texture": "9f80cc78-22df-4935-9f07-756bdc31c756@6c48a",
+    "packable": true,
+    "pixelsToUnit": 100,
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "meshType": 0
+  }
+}
