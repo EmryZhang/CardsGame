@@ -1,34 +1,34 @@
 // models/LayoutConfig.ts
-
+/**
+ * 布局配置接口
+ */
 export interface ILayoutConfig {
-    designWidth: number;
-    designHeight: number;
-    cardWidth: number;
-    cardHeight: number;
+    designWidth: number;      // 设计宽度
+    designHeight: number;     // 设计高度
+    cardWidth: number;       // 卡牌宽度
+    cardHeight: number;      // 卡牌高度
     
-    // 对应 JSON 中的 tableLayout: { "centerX": 0, "centerY": 300, "scale": 1.0 }
+    // 桌面布局
     tableLayout: {
-        centerX: number;
-        centerY: number;
-        scale: number;
+        centerX: number;     // 中心X坐标
+        centerY: number;     // 中心Y坐标
+        scale: number;       // 缩放比例
     };
     
-    // 对应 JSON 中的 handLayout
+    // 手牌布局
     handLayout: {
-        mode?: string;         // "stack_last_separate"
-        
-        // 左侧堆叠组配置
-        stackStartX: number;   // JSON: "stackStartX"
-        stackStartY: number;   // JSON: "stackStartY"
-        stackSpacingX: number; // JSON: "stackSpacingX"
-        
-        // 右侧单独卡牌配置
-        separateCardX: number; // JSON: "separateCardX"
-        separateCardY: number; // JSON: "separateCardY"
+        mode?: string;       // 布局模式
+        stackStartX: number; // 堆叠起始X坐标
+        stackStartY: number; // 堆叠起始Y坐标
+        stackSpacingX: number; // 堆叠间距
+        separateCardX: number; // 独立卡牌X坐标
+        separateCardY: number; // 独立卡牌Y坐标
     };
 }
 
-// 默认配置也要改成一样的字段名
+/**
+ * 默认布局配置
+ */
 export const DEFAULT_LAYOUT_CONFIG: ILayoutConfig = {
     designWidth: 1080,
     designHeight: 2080,

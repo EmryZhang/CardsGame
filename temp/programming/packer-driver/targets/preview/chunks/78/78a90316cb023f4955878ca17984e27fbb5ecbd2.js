@@ -12,8 +12,14 @@ System.register(["cc"], function (_export, _context) {
 
       _cclegacy._RF.push({}, "36d79xhJY9HSb4jgSeSWl2m", "LayoutConfig", undefined); // models/LayoutConfig.ts
 
+      /**
+       * 布局配置接口
+       */
 
-      // 默认配置也要改成一样的字段名
+
+      /**
+       * 默认布局配置
+       */
       _export("DEFAULT_LAYOUT_CONFIG", DEFAULT_LAYOUT_CONFIG = {
         designWidth: 1080,
         designHeight: 2080,

@@ -19,42 +19,20 @@ System.register(["__unresolved_0", "cc"], function (_export, _context) {
       _crd = true;
 
       _cclegacy._RF.push({}, "7cfecmos7REub9XQBpP+f1G", "CardService", undefined);
+
       /**
        * 卡牌服务类
-       * 处理卡牌相关的业务逻辑
        */
-
-
       _export("CardService", CardService = class CardService {
-        /**
-         * 检查两张牌的点数是否可以连接
-         * @param card1 第一张牌
-         * @param card2 第二张牌
-         * @returns 是否可以连接（点数绝对值差1，不包括相等）
-         */
+        // 检查两张牌的点数是否可以连接
         static canConnectCards(card1, card2) {
           var face1 = card1.config.CardFace;
-          var face2 = card2.config.CardFace; // 计算点数绝对值差
-
-          var diff = Math.abs(face1 - face2); // 点数绝对值差1，不包括相等
-
-          if (diff === 1) {
-            return true;
-          } // K（12）和A（0）也算作点数差1
-
-
-          if (face1 === 12 && face2 === 0 || face1 === 0 && face2 === 12) {
-            return true;
-          }
-
+          var face2 = card2.config.CardFace;
+          var diff = Math.abs(face1 - face2);
+          if (diff === 1) return true;
+          if (face1 === 12 && face2 === 0 || face1 === 0 && face2 === 12) return true;
           return false;
-        }
-        /**
-         * 检查卡牌是否可以移动到目标卡牌
-         * @param card 要移动的卡牌
-         * @param targetCard 目标卡牌
-         * @returns 是否可以移动
-         */
+        } // 检查卡牌是否可以移动到目标卡牌
 
 
         static canMoveToCard(card, targetCard) {

@@ -21,26 +21,21 @@ System.register(["__unresolved_0", "cc"], function (_export, _context) {
       _crd = true;
 
       _cclegacy._RF.push({}, "e2aa0mGo9lD+osuEl5+wNXs", "CardModel", undefined);
-      /**
-       * 卡牌模型
-       * 负责管理单张卡牌的数据和状态
-       */
 
-
+      // 扑克牌数据模型
       _export("CardModel", CardModel = class CardModel {
-        // 层级
+        // 层级深度
         constructor(config, id) {
-          // 卡牌唯一ID
           this.id = void 0;
-          // 静态配置数据
+          // 唯一标识符
           this.config = void 0;
-          // 动态状态数据
+          // 基础配置
           this.isFaceUp = false;
           // 是否正面朝上
           this.isLocked = false;
-          // 是否被锁定（不可移动）
+          // 是否锁定
           this.currentArea = '';
-          // 当前所在区域（table/hand等）
+          // 当前所在区域
           this.position = {
             x: 0,
             y: 0
@@ -50,18 +45,12 @@ System.register(["__unresolved_0", "cc"], function (_export, _context) {
           this.config = config;
           this.id = id || this.generateId();
           this.position = _extends({}, config.Position);
-        }
-        /**
-         * 生成唯一ID
-         */
+        } // 生成唯一ID
 
 
         generateId() {
           return "card_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
-        }
-        /**
-         * 更新卡牌位置
-         */
+        } // 更新位置
 
 
         updatePosition(x, y) {
@@ -69,34 +58,17 @@ System.register(["__unresolved_0", "cc"], function (_export, _context) {
             x,
             y
           };
-        }
-        /**
-         * 更新卡牌区域
-         */
+        } // 更新区域
 
 
         updateArea(area) {
           this.currentArea = area;
-        }
-        /**
-         * 翻转卡牌
-         */
-
-
-        flip() {
-          this.isFaceUp = !this.isFaceUp;
-        }
-        /**
-         * 锁定/解锁卡牌
-         */
+        } // 设置锁定状态
 
 
         setLocked(locked) {
           this.isLocked = locked;
-        }
-        /**
-         * 克隆卡牌状态
-         */
+        } // 克隆当前卡片
 
 
         clone() {
@@ -111,7 +83,7 @@ System.register(["__unresolved_0", "cc"], function (_export, _context) {
 
       });
       /**
-       * 卡牌状态接口（用于序列化）
+       * 卡牌状态快照
        */
 
 

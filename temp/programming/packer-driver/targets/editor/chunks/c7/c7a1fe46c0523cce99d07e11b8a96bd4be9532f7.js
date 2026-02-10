@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, JsonAsset, resources, GameModel, UndoModel, ActionType, DataManager, _crd;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, JsonAsset, resources, GameModel, ActionType, UndoModel, DataManager, _crd;
 
   function _reportPossibleCrUseOfLevelConfig(extras) {
     _reporterNs.report("LevelConfig", "../models/CardData", _context.meta, extras);
@@ -11,16 +11,16 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
     _reporterNs.report("GameModel", "../models/GameModel", _context.meta, extras);
   }
 
-  function _reportPossibleCrUseOfUndoModel(extras) {
-    _reporterNs.report("UndoModel", "../models/UndoModel", _context.meta, extras);
-  }
-
   function _reportPossibleCrUseOfActionType(extras) {
     _reporterNs.report("ActionType", "../models/UndoModel", _context.meta, extras);
   }
 
   function _reportPossibleCrUseOfGameAction(extras) {
     _reporterNs.report("GameAction", "../models/UndoModel", _context.meta, extras);
+  }
+
+  function _reportPossibleCrUseOfUndoModel(extras) {
+    _reporterNs.report("UndoModel", "../models/UndoModel", _context.meta, extras);
   }
 
   _export("DataManager", void 0);
@@ -37,27 +37,23 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
     }, function (_unresolved_2) {
       GameModel = _unresolved_2.GameModel;
     }, function (_unresolved_3) {
-      UndoModel = _unresolved_3.UndoModel;
       ActionType = _unresolved_3.ActionType;
+      UndoModel = _unresolved_3.UndoModel;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "4c0154STcNL5KfBSE3ho89J", "DataManager", undefined);
-      /**
-       * 游戏数据管理器
-       * 负责管理游戏流程，数据操作委托给Models层
-       */
-
 
       __checkObsolete__(['JsonAsset', 'resources']);
 
+      /**
+       * 游戏数据管理器
+       */
       _export("DataManager", DataManager = class DataManager {
         constructor() {
-          // 静态配置数据
           this._currentLevelConfig = null;
           this._currentLevelId = 1;
-          // 数据模型
           this._gameModel = new (_crd && GameModel === void 0 ? (_reportPossibleCrUseOfGameModel({
             error: Error()
           }), GameModel) : GameModel)();
@@ -72,11 +68,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           }
 
           return this._instance;
-        }
-        /**
-         * 加载关卡配置
-         * @param levelId 关卡ID
-         */
+        } // 加载关卡配置
 
 
         async loadLevel(levelId) {
@@ -97,10 +89,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
               resolve(true);
             });
           });
-        }
-        /**
-         * 清空所有数据
-         */
+        } // 清空所有数据
 
 
         clearAllData() {
@@ -108,88 +97,51 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._undoModel.clearHistory();
         }
-        /**
-         * 获取当前关卡配置
-         */
-
 
         get currentLevelConfig() {
           return this._currentLevelConfig;
         }
-        /**
-         * 获取当前关卡ID
-         */
-
 
         get currentLevelId() {
           return this._currentLevelId;
         }
-        /**
-         * 获取游戏模型
-         */
-
 
         get gameModel() {
           return this._gameModel;
         }
-        /**
-         * 获取回退模型
-         */
-
 
         get undoModel() {
           return this._undoModel;
-        }
-        /**
-         * 执行匹配操作
-         * @param tableCardId 桌面卡牌ID
-         * @returns 是否成功匹配
-         */
+        } // 执行匹配操作
 
 
         executeMatch(tableCardId) {
-          // 保存操作前的状态
           this.saveStateBeforeAction({
             type: (_crd && ActionType === void 0 ? (_reportPossibleCrUseOfActionType({
               error: Error()
             }), ActionType) : ActionType).MATCH,
             tableCardId: tableCardId
-          }); // 执行匹配
-
+          });
           return this._gameModel.executeMatch(tableCardId);
-        }
-        /**
-         * 替换手牌最后一张
-         * @param cardId 要替换的卡牌ID
-         * @returns 是否成功替换
-         */
+        } // 替换手牌最后一张
 
 
         replaceLastHandCard(cardId) {
-          // 保存操作前的状态
           this.saveStateBeforeAction({
             type: (_crd && ActionType === void 0 ? (_reportPossibleCrUseOfActionType({
               error: Error()
             }), ActionType) : ActionType).REPLACE,
             cardId: cardId
-          }); // 执行替换
-
+          });
           return this._gameModel.replaceLastHandCard(cardId);
-        }
-        /**
-         * 保存操作前的状态
-         */
+        } // 保存操作前的状态
 
 
         saveStateBeforeAction(action) {
           const cardsState = this._gameModel.getAllCardsState();
 
           this._undoModel.saveAction(action, cardsState);
-        }
-        /**
-         * 撤销上一步操作
-         * @returns 是否成功撤销
-         */
+        } // 撤销上一步操作
 
 
         undo() {
@@ -200,26 +152,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._gameModel.restoreAllCardsState(record.cardsState);
 
           return true;
-        }
-        /**
-         * 清空历史记录
-         */
+        } // 清空历史记录
 
 
         clearHistory() {
           this._undoModel.clearHistory();
-        }
-        /**
-         * 获取历史记录数量
-         */
+        } // 获取历史记录数量
 
 
         getHistoryCount() {
           return this._undoModel.getHistoryCount();
-        }
-        /**
-         * 检查是否可以撤销
-         */
+        } // 检查是否可以撤销
 
 
         canUndo() {

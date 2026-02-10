@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 9451.6492,
+      "mTimestamp": 9278.203,
       "chunkId": "93ba276ea7b26ffcdc433fab14afc1ed6f05647b",
       "imports": [
         {
@@ -514,7 +514,7 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 1665986.1352,
+      "mTimestamp": 748859.4555,
       "chunkId": "6d8fd2b0177941b032ddc0733af48a561fb60657",
       "imports": [
         {
@@ -602,7 +602,7 @@
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/configs/GameConfig.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/controllers/LevelController.ts",
           "resolved": "__unresolved_6",
           "loc": {
             "start": {
@@ -611,12 +611,12 @@
             },
             "end": {
               "line": 10,
-              "column": 75
+              "column": 84
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/controllers/LevelController.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/managers/DataManager.ts",
           "resolved": "__unresolved_7",
           "loc": {
             "start": {
@@ -625,12 +625,12 @@
             },
             "end": {
               "line": 11,
-              "column": 84
+              "column": 77
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/controllers/LevelController_bak.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/CardData.ts",
           "resolved": "__unresolved_8",
           "loc": {
             "start": {
@@ -639,12 +639,12 @@
             },
             "end": {
               "line": 12,
-              "column": 88
+              "column": 72
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/managers/DataManager.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/CardModel.ts",
           "resolved": "__unresolved_9",
           "loc": {
             "start": {
@@ -653,12 +653,12 @@
             },
             "end": {
               "line": 13,
-              "column": 77
+              "column": 73
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/CardData.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/GameModel.ts",
           "resolved": "__unresolved_10",
           "loc": {
             "start": {
@@ -667,12 +667,12 @@
             },
             "end": {
               "line": 14,
-              "column": 72
+              "column": 73
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/CardModel.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/LayoutConfig.ts",
           "resolved": "__unresolved_11",
           "loc": {
             "start": {
@@ -681,12 +681,12 @@
             },
             "end": {
               "line": 15,
-              "column": 73
+              "column": 76
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/GameModel.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/RuntimeCardData.ts",
           "resolved": "__unresolved_12",
           "loc": {
             "start": {
@@ -695,12 +695,12 @@
             },
             "end": {
               "line": 16,
-              "column": 73
+              "column": 79
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/LayoutConfig.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/UndoModel.ts",
           "resolved": "__unresolved_13",
           "loc": {
             "start": {
@@ -709,12 +709,12 @@
             },
             "end": {
               "line": 17,
-              "column": 76
+              "column": 73
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/RuntimeCardData.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/services/CardService.ts",
           "resolved": "__unresolved_14",
           "loc": {
             "start": {
@@ -723,12 +723,12 @@
             },
             "end": {
               "line": 18,
-              "column": 79
+              "column": 77
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/models/UndoModel.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/utils/CardUtils.ts",
           "resolved": "__unresolved_15",
           "loc": {
             "start": {
@@ -737,12 +737,12 @@
             },
             "end": {
               "line": 19,
-              "column": 73
+              "column": 72
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/services/CardService.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/Classes/views/CardView.ts",
           "resolved": "__unresolved_16",
           "loc": {
             "start": {
@@ -751,12 +751,12 @@
             },
             "end": {
               "line": 20,
-              "column": 77
+              "column": 71
             }
           }
         },
         {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/utils/CardUtils.ts",
+          "value": "file:///D:/Work/job/CardsGame/assets/resources/configs/GameConfig.ts",
           "resolved": "__unresolved_17",
           "loc": {
             "start": {
@@ -765,34 +765,6 @@
             },
             "end": {
               "line": 21,
-              "column": 72
-            }
-          }
-        },
-        {
-          "value": "file:///D:/Work/job/CardsGame/assets/Classes/views/CardView.ts",
-          "resolved": "__unresolved_18",
-          "loc": {
-            "start": {
-              "line": 22,
-              "column": 7
-            },
-            "end": {
-              "line": 22,
-              "column": 71
-            }
-          }
-        },
-        {
-          "value": "file:///D:/Work/job/CardsGame/assets/resources/configs/GameConfig.ts",
-          "resolved": "__unresolved_19",
-          "loc": {
-            "start": {
-              "line": 23,
-              "column": 7
-            },
-            "end": {
-              "line": 23,
               "column": 77
             }
           }
@@ -845,21 +817,7 @@
         {
           "resolved": {
             "type": "module",
-            "url": "file:///D:/Work/job/CardsGame/assets/Classes/configs/GameConfig.ts"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
             "url": "file:///D:/Work/job/CardsGame/assets/Classes/controllers/LevelController.ts"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
-            "url": "file:///D:/Work/job/CardsGame/assets/Classes/controllers/LevelController_bak.ts"
           },
           "messages": []
         },
@@ -1505,7 +1463,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1770706150200,
+      "mTimestamp": 1770709318027,
       "chunkId": "6a5019a719a9014c047e67aa1cf34453ab8392ce",
       "imports": [],
       "type": "esm",
@@ -1513,7 +1471,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/controllers/LevelController.ts": {
       "mTimestamp": {
-        "mtime": 1770707812310.4634,
+        "mtime": 1770710063429.5308,
         "uuid": "3920ee78-d35f-498c-8080-20f98ab3f85a"
       },
       "chunkId": "8e6a2dfbf4444ee3d25a6b640ffc1504bf6ede93",
@@ -1681,7 +1639,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/models/CardData.ts": {
       "mTimestamp": {
-        "mtime": 1770649933174.611,
+        "mtime": 1770709714382.4343,
         "uuid": "141565df-57f9-4de7-a89f-38b73dc51cf8"
       },
       "chunkId": "01d5ed5bb8863d0a2da4c5f597f49f4d62ff05f8",
@@ -1792,7 +1750,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/models/LayoutConfig.ts": {
       "mTimestamp": {
-        "mtime": 1770692015604.8125,
+        "mtime": 1770709833131.4917,
         "uuid": "36d79c61-258f-4749-be23-8127925a5da6"
       },
       "chunkId": "78a90316cb023f4955878ca17984e27fbb5ecbd2",
@@ -2025,7 +1983,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/managers/DataManager.ts": {
       "mTimestamp": {
-        "mtime": 1770652030099.879,
+        "mtime": 1770709969815.7966,
         "uuid": "4c015e12-4dc3-4be4-a7c1-484de1a3cf49"
       },
       "chunkId": "c7a1fe46c0523cce99d07e11b8a96bd4be9532f7",
@@ -2044,11 +2002,11 @@
           "value": "cc",
           "loc": {
             "start": {
-              "line": 5,
+              "line": 1,
               "column": 37
             },
             "end": {
-              "line": 5,
+              "line": 1,
               "column": 41
             }
           }
@@ -2058,11 +2016,11 @@
           "resolved": "__unresolved_1",
           "loc": {
             "start": {
-              "line": 7,
+              "line": 3,
               "column": 26
             },
             "end": {
-              "line": 7,
+              "line": 3,
               "column": 47
             }
           }
@@ -2072,11 +2030,11 @@
           "resolved": "__unresolved_2",
           "loc": {
             "start": {
-              "line": 8,
+              "line": 4,
               "column": 50
             },
             "end": {
-              "line": 8,
+              "line": 4,
               "column": 71
             }
           }
@@ -2130,7 +2088,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/utils/CardUtils.ts": {
       "mTimestamp": {
-        "mtime": 1770698180164.6797,
+        "mtime": 1770709934640.823,
         "uuid": "59ba776e-f08f-490a-b6de-f22a6150f6c6"
       },
       "chunkId": "f8350495189f06d5464b0098dc7f63c995aba251",
@@ -2147,11 +2105,11 @@
           "resolved": "__unresolved_1",
           "loc": {
             "start": {
-              "line": 5,
+              "line": 1,
               "column": 35
             },
             "end": {
-              "line": 5,
+              "line": 1,
               "column": 55
             }
           }
@@ -2184,7 +2142,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/models/RuntimeCardData.ts": {
       "mTimestamp": {
-        "mtime": 1770647460761.6602,
+        "mtime": 1770709862136.6401,
         "uuid": "77cc3524-6694-4822-ad9f-d38d803fdfa0"
       },
       "chunkId": "93cde6773ee90073613c6d09047e639e6d22d1ae",
@@ -2292,16 +2250,21 @@
         },
         {
           "resolved": {
-            "type": "module",
-            "url": "file:///D:/Work/job/CardsGame/assets/Classes/configs/GameConfig.ts"
+            "type": "error",
+            "text": "Error: Module \"../configs/GameConfig\" not found for file:///D:/Work/job/CardsGame/assets/Classes/controllers/LevelController_bak.ts"
           },
-          "messages": []
+          "messages": [
+            {
+              "level": "warn",
+              "text": "Did you forget the extension? Please note that you can not omit extension in module specifier."
+            }
+          ]
         }
       ]
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/models/CardModel.ts": {
       "mTimestamp": {
-        "mtime": 1770651946297.9114,
+        "mtime": 1770709749426.7397,
         "uuid": "e2aa0986-a3d9-43fa-8b2e-125e7ec0d5ec"
       },
       "chunkId": "fedac90c974e6948900a90aacb5c70c174bc597f",
@@ -2334,7 +2297,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/models/GameModel.ts": {
       "mTimestamp": {
-        "mtime": 1770706766701.044,
+        "mtime": 1770709804194.994,
         "uuid": "332f9115-63e9-4bb0-b254-c1449ec2a548"
       },
       "chunkId": "689dc979695ae446c5be3133d1aee3b7df465181",
@@ -2351,11 +2314,11 @@
           "resolved": "__unresolved_1",
           "loc": {
             "start": {
-              "line": 6,
+              "line": 2,
               "column": 37
             },
             "end": {
-              "line": 6,
+              "line": 2,
               "column": 50
             }
           }
@@ -2388,7 +2351,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/models/UndoModel.ts": {
       "mTimestamp": {
-        "mtime": 1770651981835.9268,
+        "mtime": 1770709880458.7915,
         "uuid": "2f6835c3-6799-460d-9f71-d6b6e8d07a5e"
       },
       "chunkId": "cde9aade68c0aa9319ecda478cf5af7b2dc3f32b",
@@ -2421,7 +2384,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/resources/configs/GameConfig.ts": {
       "mTimestamp": {
-        "mtime": 1770693875910.7576,
+        "mtime": 1770709557355.807,
         "uuid": "45a9aa2f-077f-4159-81fb-0365b1f66207"
       },
       "chunkId": "082064af05bc2e41f38e6d3acdafe4611973e08a",
@@ -2473,7 +2436,7 @@
     },
     "file:///D:/Work/job/CardsGame/assets/Classes/services/CardService.ts": {
       "mTimestamp": {
-        "mtime": 1770700823859.465,
+        "mtime": 1770709909706.1775,
         "uuid": "7cfec9a8-b3b4-44b9-bf57-401a4ff9fd46"
       },
       "chunkId": "77d92e3dacaa459b692271cb356367a38db8b142",

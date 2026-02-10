@@ -12,14 +12,14 @@ System.register(["cc"], function (_export, _context) {
 
       _cclegacy._RF.push({}, "14156XfV/lN56ifOLc9xRz4", "CardData", undefined);
 
-      // 扑克牌花色
+      // 扑克牌花色枚举
       _export("CardSuit", CardSuit = /*#__PURE__*/function (CardSuit) {
         CardSuit[CardSuit["CLUB"] = 0] = "CLUB";
         CardSuit[CardSuit["DIAMOND"] = 1] = "DIAMOND";
         CardSuit[CardSuit["HEART"] = 2] = "HEART";
         CardSuit[CardSuit["SPADE"] = 3] = "SPADE";
         return CardSuit;
-      }({})); // 扑克牌点数（从0开始，对应A-K）
+      }({})); // 扑克牌点数枚举
 
 
       _export("CardFace", CardFace = /*#__PURE__*/function (CardFace) {
@@ -37,8 +37,8 @@ System.register(["cc"], function (_export, _context) {
         CardFace[CardFace["QUEEN"] = 11] = "QUEEN";
         CardFace[CardFace["KING"] = 12] = "KING";
         return CardFace;
-      }({})); // 卡牌配置接口
-      // 关卡配置接口
+      }({})); // 单张卡牌配置
+      // 关卡配置
 
 
       _cclegacy._RF.pop();
