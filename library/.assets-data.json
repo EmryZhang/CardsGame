@@ -1389,8 +1389,10 @@
     "url": "db://assets/scene.scene",
     "value": {
       "depends": [
-        "ac594f7d-42cf-44ba-b471-5980034640c4@f9941",
-        "9f80cc78-22df-4935-9f07-756bdc31c756@f9941",
+        "dcdccbe0-5019-4c9d-8372-02f28606e19d@f9941",
+        "20835ba4-6145-4fbc-a58a-051ce700aa3e@f9941",
+        "544e49d6-3f05-4fa8-9a9e-091f98fc2ce8@f9941",
+        "951249e0-9f16-456d-8b85-a6ca954da16b@f9941",
         "e80c6670-a7f6-4eff-aa11-174ff7e57506",
         "88dbc151-949d-4d3d-8c5a-c90e0e0be9dd@f9941",
         "6acd0de5-0a8f-4ac0-95f4-2030303d0c93@f9941",
@@ -3145,6 +3147,41 @@
   },
   "2f6835c3-6799-460d-9f71-d6b6e8d07a5e": {
     "url": "db://assets/Classes/models/UndoModel.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "dcdccbe0-5019-4c9d-8372-02f28606e19d": {
+    "url": "db://assets/resources/images/CardArea.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "dcdccbe0-5019-4c9d-8372-02f28606e19d@6c48a": {
+    "url": "db://assets/resources/images/CardArea.png@6c48a",
+    "value": {
+      "depends": [
+        "dcdccbe0-5019-4c9d-8372-02f28606e19d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "dcdccbe0-5019-4c9d-8372-02f28606e19d@f9941": {
+    "url": "db://assets/resources/images/CardArea.png@f9941",
+    "value": {
+      "depends": [
+        "dcdccbe0-5019-4c9d-8372-02f28606e19d@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "45a9aa2f-077f-4159-81fb-0365b1f66207": {
+    "url": "db://assets/resources/configs/GameConfig.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "7cfec9a8-b3b4-44b9-bf57-401a4ff9fd46": {
+    "url": "db://assets/Classes/services/CardService.ts",
     "value": {},
     "versionCode": 1
   }

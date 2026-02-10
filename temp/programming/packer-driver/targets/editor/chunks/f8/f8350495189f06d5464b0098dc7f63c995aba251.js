@@ -1,14 +1,14 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, CardSuit, CardFace, CardUtils, _crd;
-
-  function _reportPossibleCrUseOfCardSuit(extras) {
-    _reporterNs.report("CardSuit", "../models/CardData", _context.meta, extras);
-  }
+  var _reporterNs, _cclegacy, CardFace, CardSuit, CardUtils, _crd;
 
   function _reportPossibleCrUseOfCardFace(extras) {
     _reporterNs.report("CardFace", "../models/CardData", _context.meta, extras);
+  }
+
+  function _reportPossibleCrUseOfCardSuit(extras) {
+    _reporterNs.report("CardSuit", "../models/CardData", _context.meta, extras);
   }
 
   _export("CardUtils", void 0);
@@ -19,8 +19,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
     }, function (_cc) {
       _cclegacy = _cc.cclegacy;
     }, function (_unresolved_2) {
-      CardSuit = _unresolved_2.CardSuit;
       CardFace = _unresolved_2.CardFace;
+      CardSuit = _unresolved_2.CardSuit;
     }],
     execute: function () {
       _crd = true;
@@ -153,8 +153,75 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           if (value1 < value2) return -1;
           return 0;
         }
+        /**
+         * 将配置文件中的绝对坐标转换为相对坐标
+         * @param x 绝对坐标X
+         * @param y 绝对坐标Y
+         * @returns 相对坐标 { x, y }
+         */
+
+
+        static convertAbsoluteToRelative(x, y) {
+          // 从GameConfig读取设计分辨率
+          const designWidth = 1080; // 默认值
+
+          const designHeight = 2080; // 默认值
+          // 将坐标平移50%（减去屏幕分辨率的一半）
+
+          return {
+            x: x - designWidth / 2,
+            y: y - designHeight / 2
+          };
+        }
+        /**
+         * 将相对坐标转换为绝对坐标（用于手牌区平移）
+         * @param x 相对坐标X
+         * @param y 相对坐标Y
+         * @returns 绝对坐标 { x, y }
+         */
+
+
+        static convertRelativeToAbsolute(x, y) {
+          // 从GameConfig读取设计分辨率
+          const designWidth = 1080; // 默认值
+
+          const designHeight = 2080; // 默认值
+          // 将坐标平移50%（加上屏幕分辨率的一半）
+
+          return {
+            x: x + designWidth / 2,
+            y: y + designHeight / 2
+          };
+        }
+        /**
+         * 将配置文件中的绝对坐标转换为相对坐标（用于桌面牌，往上偏移TABLE_Y_OFFSET像素）
+         * @param x 绝对坐标X
+         * @param y 绝对坐标Y
+         * @returns 相对坐标 { x, y }
+         */
+
+
+        static convertAbsoluteToRelativeForTable(x, y) {
+          // 从GameConfig读取设计分辨率
+          const designWidth = 1080; // 默认值
+
+          const designHeight = 2080; // 默认值
+          // 将坐标平移50%（减去屏幕分辨率的一半）
+
+          let relativeX = x - designWidth / 2;
+          let relativeY = y - designHeight / 2; // 往上偏移TABLE_Y_OFFSET像素
+
+          relativeY += CardUtils.TABLE_Y_OFFSET;
+          return {
+            x: relativeX,
+            y: relativeY
+          };
+        }
 
       });
+
+      // 桌面牌Y轴偏移量（像素）
+      CardUtils.TABLE_Y_OFFSET = 350;
 
       _cclegacy._RF.pop();
 

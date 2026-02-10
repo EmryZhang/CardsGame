@@ -27,10 +27,10 @@ System.register(["cc"], function (_export, _context) {
         handLayout: {
           mode: "stack_last_separate",
           stackStartX: -200,
-          stackStartY: -750,
+          stackStartY: 750,
           stackSpacingX: 100,
           separateCardX: 350,
-          separateCardY: -750
+          separateCardY: 750
         }
       });
 

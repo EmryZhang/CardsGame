@@ -1,25 +1,45 @@
 import { _decorator, Color, Component, instantiate, Node, Prefab, Sprite, SpriteFrame, tween, Vec3 } from 'cc';
-import { GameConfig } from '../configs/GameConfig';
+import { GameConfig } from '../../resources/configs/GameConfig';
 import { DataManager } from '../managers/DataManager';
 import { CardModel } from '../models/CardModel';
+import { CardService } from '../services/CardService';
 import { CardUtils } from '../utils/CardUtils';
 import CardView from '../views/CardView';
 
 const { ccclass, property } = _decorator;
 
+// 卡牌移动记录接口
+interface CardMoveRecord {
+    cardId: string;
+    fromPosition: { x: number, y: number };
+    toPosition: { x: number, y: number };
+    fromArea: string;
+    toArea: string;
+    zIndex: number;
+    // 记录移动前的顶牌ID
+    previousTopCardId: string | null;
+    // 记录移动前的备用牌ID列表
+    previousReserveCardIds: string[];
+}
+
 @ccclass('LevelController')
 export default class LevelController extends Component {
     // --- 属性定义 ---
     @property(Prefab) cardPrefab: Prefab = null;
-    @property(Node) handArea: Node = null;
     @property(Node) tableArea: Node = null;
+    @property(Node) undoButton: Node = null;
 
     // --- 资源引用 ---
     @property([SpriteFrame]) bigRedNumbers: SpriteFrame[] = [];
+
+    // --- 游戏状态 ---
     @property([SpriteFrame]) bigBlackNumbers: SpriteFrame[] = [];
     @property([SpriteFrame]) smallRedNumbers: SpriteFrame[] = [];
     @property([SpriteFrame]) smallBlackNumbers: SpriteFrame[] = [];
     @property([SpriteFrame]) suitSprites: SpriteFrame[] = [];
+
+    // --- 历史记录 ---
+    private historyStack: CardMoveRecord[] = [];
 
     async onLoad() {
         // 1. 初始化配置
@@ -28,6 +48,8 @@ export default class LevelController extends Component {
         await this.loadLevel();
         // 3. 创建卡牌视图
         this.createCardsFromData();
+        // 4. 设置回退按钮
+        this.setupUndoButton();
     }
 
     private async initializeConfig(): Promise<void> {
@@ -38,6 +60,148 @@ export default class LevelController extends Component {
         const success = await DataManager.instance.loadLevel(1);
         if (!success) {
             console.error('加载关卡失败');
+        } else {
+            // 加载关卡成功后，更新顶牌和备用牌
+            DataManager.instance.gameModel.updateTopAndReserveCards();
+        }
+    }
+
+    /**
+     * 设置回退按钮
+     */
+    private setupUndoButton(): void {
+        if (!this.undoButton) {
+            console.warn('回退按钮未设置');
+            return;
+        }
+
+        this.undoButton.on(Node.EventType.TOUCH_END, () => {
+            this.undoLastMove();
+        }, this);
+    }
+
+    /**
+     * 保存卡牌移动记录
+     * @param cardData 卡牌数据
+     * @param targetPosition 目标位置
+     */
+    private saveCardMoveRecord(cardData: CardModel, targetPosition: { x: number, y: number }): void {
+        // 找到对应的卡牌节点
+        const children = this.tableArea.children;
+        let cardNode: Node | null = null;
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            const cardId = (child as any).cardId;
+            if (cardId === cardData.id) {
+                cardNode = child;
+                break;
+            }
+        }
+
+        if (!cardNode) {
+            console.error(`未找到卡牌节点: ${cardData.id}`);
+            return;
+        }
+
+        // 获取卡牌节点的当前位置
+        const currentPosition = cardNode.getPosition();
+
+        // 获取当前顶牌
+        const currentTopCard = DataManager.instance.gameModel.topCard;
+        const reserveCards = DataManager.instance.gameModel.reserveCards;
+        
+        // 记录备用牌的ID列表
+        const previousReserveCardIds = reserveCards.map(card => card.id);
+
+        const record: CardMoveRecord = {
+            cardId: cardData.id,
+            fromPosition: { x: currentPosition.x, y: currentPosition.y },
+            toPosition: { x: targetPosition.x, y: targetPosition.y },
+            fromArea: cardData.currentArea,
+            toArea: cardData.currentArea, // 暂时保持不变，因为现在所有卡牌都在tableArea中
+            zIndex: cardData.zIndex,
+            previousTopCardId: currentTopCard ? currentTopCard.id : null,
+            previousReserveCardIds: previousReserveCardIds
+        };
+
+        this.historyStack.push(record);
+    }
+
+    /**
+     * 回退最后一次移动
+     */
+    private undoLastMove(): void {
+        if (this.historyStack.length === 0) {
+            console.log('没有可回退的移动');
+            return;
+        }
+
+        const lastRecord = this.historyStack.pop();
+        if (!lastRecord) return;
+
+        console.log('回退卡牌移动:', lastRecord);
+
+        // 找到对应的卡牌节点
+        const children = this.tableArea.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            const cardId = (child as any).cardId;
+
+            if (cardId === lastRecord.cardId) {
+                // fromPosition已经是卡牌节点的当前位置（相对坐标）
+                // 不需要再做任何转换，直接使用即可
+                const targetX = lastRecord.fromPosition.x;
+                const targetY = lastRecord.fromPosition.y;
+
+                // 使用tween动画移动卡牌回退
+                tween(child)
+                    .to(0.3, { position: new Vec3(targetX, targetY, 0) })
+                    .call(() => {
+                        // 动画完成后恢复顶牌
+                        if (lastRecord.previousTopCardId) {
+                            const previousTopCard = DataManager.instance.gameModel.getCardById(lastRecord.previousTopCardId);
+                            if (previousTopCard) {
+                                DataManager.instance.gameModel.topCard = previousTopCard;
+                                const suitName = this.getSuitName(previousTopCard.config.CardSuit);
+                                const faceName = this.getFaceName(previousTopCard.config.CardFace);
+                                console.log(`恢复顶牌: ${suitName}${faceName}`);
+                            }
+                        } else {
+                            // 如果没有之前的顶牌，设置为null
+                            DataManager.instance.gameModel.topCard = null;
+                            console.log('恢复顶牌: 无');
+                        }
+                        
+                        // 恢复备用牌数组
+                        if (lastRecord.previousReserveCardIds && lastRecord.previousReserveCardIds.length > 0) {
+                            const restoredReserveCards: CardModel[] = [];
+                            lastRecord.previousReserveCardIds.forEach(cardId => {
+                                const card = DataManager.instance.gameModel.getCardById(cardId);
+                                if (card) {
+                                    restoredReserveCards.push(card);
+                                }
+                            });
+                            DataManager.instance.gameModel.reserveCards = restoredReserveCards;
+                            console.log(`恢复备用牌数量: ${restoredReserveCards.length}`);
+                        } else {
+                            DataManager.instance.gameModel.reserveCards = [];
+                            console.log('恢复备用牌数量: 0');
+                        }
+                    })
+                    .start();
+
+                // 更新卡牌数据的位置
+                const cardData = this.getCardDataFromNode(child);
+                if (cardData) {
+                    cardData.updatePosition(targetX, targetY);
+                    cardData.zIndex = lastRecord.zIndex;
+                }
+
+                // 更新层级
+                child.setSiblingIndex(lastRecord.zIndex);
+
+                break;
+            }
         }
     }
 
@@ -45,7 +209,6 @@ export default class LevelController extends Component {
         if (!this.cardPrefab) return;
 
         this.tableArea.removeAllChildren();
-        this.handArea.removeAllChildren();
 
         const layoutConfig = GameConfig.instance.layoutConfig;
 
@@ -59,6 +222,13 @@ export default class LevelController extends Component {
         DataManager.instance.gameModel.handCards.forEach((cardData) => {
             this.createHandCard(cardData, layoutConfig, totalHandCards);
         });
+
+        // 3. 设置初始顶牌（手牌区最右边的一张）
+        const handCards = Array.from(DataManager.instance.gameModel.handCards.values());
+        if (handCards.length > 0) {
+            DataManager.instance.gameModel.topCard = handCards[handCards.length - 1];
+            console.log(`初始顶牌: ${this.getSuitName(DataManager.instance.gameModel.topCard.config.CardSuit)}${this.getFaceName(DataManager.instance.gameModel.topCard.config.CardFace)}`);
+        }
     }
 
     // --- 创建桌面牌 ---
@@ -72,36 +242,47 @@ export default class LevelController extends Component {
         console.log('已将cardId存储到节点属性:', cardData.id);
 
         this.setupCardDisplay(cardNode, cardData);
+        this.setupTableCardPosition(cardNode, cardData, layoutConfig);
 
         // 设置点击回调
         const cardView = cardNode.getComponent(CardView);
         if (cardView) {
             cardView.setClickCallback((view: CardView) => {
-                console.log('点击了桌面卡牌:', view.getCardData());
                 this.onTableCardClick(cardNode);
             });
             console.log('桌面卡牌点击回调已设置');
         } else {
             console.error('未找到CardView组件！');
         }
+    }
 
-        // 使用CardModel中的位置
-        let posX = cardData.position.x;
-        let posY = cardData.position.y;
+    // --- 设置桌面牌位置 ---
+    private setupTableCardPosition(
+        cardNode: Node,
+        cardData: CardModel,
+        layoutConfig: any
+    ): void {
+        // 使用CardUtils.convertAbsoluteToRelativeForTable来转换坐标（往上偏移300像素）
+        const relativePos = CardUtils.convertAbsoluteToRelativeForTable(
+            cardData.position.x,
+            cardData.position.y
+        );
 
-        // 简单的向下微调，防止卡牌超出屏幕上边缘
-        posX = posX - 540;
-        posY = posY - 960 + 300;
+        const posX = relativePos.x;
+        const posY = relativePos.y;
+        const zIndex = cardData.zIndex;
 
         cardNode.setPosition(posX, posY, 0);
-        cardNode.setSiblingIndex(cardData.zIndex); // 确保渲染顺序
+        cardNode.setSiblingIndex(zIndex);
+
+        console.log(`桌面牌位置: (${posX}, ${posY})`);
     }
 
     // --- 创建手牌 ---
     private createHandCard(cardData: CardModel, layoutConfig: any, totalCards: number): void {
         console.log('创建手牌:', cardData);
         const cardNode = instantiate(this.cardPrefab);
-        this.handArea.addChild(cardNode);
+        this.tableArea.addChild(cardNode);
 
         // 将cardId存储到节点属性上
         (cardNode as any).cardId = cardData.id;
@@ -130,19 +311,16 @@ export default class LevelController extends Component {
         layoutConfig: any,
         totalCards: number
     ): void {
-        // 安全获取配置，如果 layoutConfig 为空，使用后面的默认值 (??) 防止不显示
-        console.log('布局配置:', layoutConfig);
-        // 这里为了兼容你可能还没改好的 JSON 字段，做了一些兼容处理
         const handConf = layoutConfig?.handLayout || {};
 
         // 读取配置参数 (带有默认值，保证绝对能显示出来)
-        const stackX = handConf.stackStartX ?? handConf.stackStartX ?? -350;
+        const stackX = handConf.stackStartX ?? -350;
         const startY = handConf.stackStartY ?? 0;
-        const spacingX = handConf.horizontalSpacing ?? handConf.stackSpacingX ?? 100;
+        const spacingX = handConf.stackSpacingX ?? 100;
 
         // 右侧单张的位置
-        const separateX = handConf.separateCardX ?? handConf.separateCardX ?? 200;
-        const separateY = handConf.separateCardY ?? handConf.separateCardY ?? startY;
+        const separateX = handConf.separateCardX ?? 200;
+        const separateY = handConf.separateCardY ?? startY;
 
         // 获取当前卡牌的索引
         const index = Array.from(DataManager.instance.gameModel.handCards.values()).indexOf(cardData);
@@ -167,6 +345,10 @@ export default class LevelController extends Component {
 
         cardNode.setPosition(posX, posY, 0);
         cardNode.setSiblingIndex(zIndex);
+
+        // 更新卡牌数据的位置
+        cardData.updatePosition(posX, posY);
+        cardData.zIndex = zIndex;
 
         console.log(`手牌 ${index} 位置: (${posX}, ${posY})`);
     }
@@ -228,14 +410,8 @@ export default class LevelController extends Component {
         const cardData = this.getCardDataFromNode(cardNode);
         if (!cardData || cardData.currentArea !== 'table') return;
 
-        // 将桌面牌从tableArea移动到handArea
-        cardNode.setParent(this.handArea);
-
-        // 更新卡牌数据
-        cardData.updateArea('hand');
-
-        // 将桌面牌移动到手牌最后一张的位置
-        this.moveCardToLastHandPosition(cardNode, cardData);
+        // 统一处理卡牌点击
+        this.handleCardClick(cardNode, cardData);
     }
 
     /**
@@ -246,46 +422,168 @@ export default class LevelController extends Component {
         const cardData = this.getCardDataFromNode(cardNode);
         if (!cardData || cardData.currentArea !== 'hand') return;
 
-        // 检查是否是最后一张
-        const handCards = Array.from(DataManager.instance.gameModel.handCards.values());
-        const isLastCard = handCards[handCards.length - 1]?.id === cardData.id;
-
-        // 如果不是最后一张，移动到最后一张的位置
-        if (!isLastCard) {
-            this.moveCardToLastHandPosition(cardNode, cardData);
-        }
+        // 统一处理卡牌点击
+        this.handleCardClick(cardNode, cardData);
     }
 
     /**
-     * 将卡牌移动到手牌最后一张的位置
+     * 统一处理卡牌点击事件
      * @param cardNode 卡牌节点
      * @param cardData 卡牌数据
      */
-    private moveCardToLastHandPosition(cardNode: Node, cardData: CardModel): void {
-        const layoutConfig = GameConfig.instance.layoutConfig;
-        const handConf = layoutConfig?.handLayout;
+    private handleCardClick(cardNode: Node, cardData: CardModel): void {
+        // 获取当前顶牌
+        const currentTopCard = DataManager.instance.gameModel.topCard;
+        const reserveCards = DataManager.instance.gameModel.reserveCards;
 
-        // 获取最后一张牌的位置配置（与setupHandCardPosition保持一致）
-        const targetX = handConf?.separateCardX ?? 200;
-        const targetY = handConf?.separateCardY ?? 0;
+        // 打印当前顶牌信息
+        if (currentTopCard) {
+            const topSuitName = this.getSuitName(currentTopCard.config.CardSuit);
+            const topFaceName = this.getFaceName(currentTopCard.config.CardFace);
+            console.log(`当前顶牌: ${topSuitName}${topFaceName}`);
+        } else {
+            console.log(`当前顶牌: 无`);
+        }
+
+        // 打印备用牌信息
+        console.log(`备用牌数量: ${reserveCards.length}`);
+        reserveCards.forEach((card, index) => {
+            const suitName = this.getSuitName(card.config.CardSuit);
+            const faceName = this.getFaceName(card.config.CardFace);
+            console.log(`备用牌[${index}]: ${suitName}${faceName}`);
+        });
+
+        // 如果是手牌区的牌，检查是否是最右边的一张备用牌
+        if (cardData.currentArea === 'hand') {
+            // 检查点击的牌是否是最右边的一张备用牌（不是顶牌）
+            if (cardData !== currentTopCard) {
+                // 检查是否是备用牌中最右边的一张
+                const cardIndex = reserveCards.indexOf(cardData);
+                console.log(`点击的备用牌索引: ${cardIndex}, 备用牌数量: ${reserveCards.length}`);
+                if (cardIndex !== reserveCards.length - 1) {
+                    console.log(`只能点击备用牌中最右边的一张`);
+                    return;
+                }
+
+                // 点击的是备用牌，更新顶牌为这张备用牌
+                console.log(`使用备用牌: ${this.getSuitName(cardData.config.CardSuit)}${this.getFaceName(cardData.config.CardFace)}`);
+                DataManager.instance.gameModel.topCard = cardData;
+                const suitName = this.getSuitName(cardData.config.CardSuit);
+                const faceName = this.getFaceName(cardData.config.CardFace);
+                console.log(`更新顶牌: ${suitName}${faceName}`);
+                
+                // 从备用牌数组中移除被使用的备用牌
+                const currentReserveCards = DataManager.instance.gameModel.reserveCards;
+                const cardIndex2 = currentReserveCards.indexOf(cardData);
+                if (cardIndex2 !== -1) {
+                    currentReserveCards.splice(cardIndex2, 1);
+                    console.log(`备用牌数量从${cardIndex2 + 1}减少到${currentReserveCards.length}`);
+                }
+            }
+        }
+
+        // 如果不是手牌区的牌，检查点数是否可以连接
+        if (cardData.currentArea !== 'hand' && currentTopCard) {
+            const canMove = CardService.canMoveToCard(cardData, currentTopCard);
+            if (!canMove) {
+                console.log(`卡牌点数不匹配，无法移动`);
+                return;
+            }
+        }
+
+        // 计算目标位置
+        const targetPosition = this.calculateTargetPosition(cardData);
 
         // 打印卡牌信息和目标位置
         const suitName = this.getSuitName(cardData.config.CardSuit);
         const faceName = this.getFaceName(cardData.config.CardFace);
-        console.log(`点击卡牌: ${suitName}${faceName}`);
-        console.log(`移动目标位置: (${targetX}, ${targetY})`);
+        const areaName = cardData.currentArea === 'table' ? '桌面' : '手牌';
+        console.log(`点击${areaName}卡牌: ${suitName}${faceName}`);
 
-        // 使用tween动画移动卡牌（直接使用配置值，不进行额外调整）
-        tween(cardNode)
-            .to(0.3, { position: new Vec3(targetX, targetY, 0) })
-            .start();
+        // 保存当前状态到历史记录
+        this.saveCardMoveRecord(cardData, targetPosition);
+
+        // 如果是桌牌，立即更新顶牌
+        if (cardData.currentArea === 'table') {
+            DataManager.instance.gameModel.topCard = cardData;
+            const suitName = this.getSuitName(cardData.config.CardSuit);
+            const faceName = this.getFaceName(cardData.config.CardFace);
+            console.log(`立即更新顶牌: ${suitName}${faceName}`);
+        }
 
         // 更新卡牌数据的位置
-        cardData.updatePosition(targetX, targetY);
+        cardData.updatePosition(targetPosition.x, targetPosition.y);
 
         // 更新层级到最上层
         cardNode.setSiblingIndex(100);
         cardData.zIndex = 100;
+
+        // 使用tween动画移动卡牌
+        tween(cardNode)
+            .to(0.3, { position: new Vec3(targetPosition.x, targetPosition.y, 0) })
+            .call(() => {
+                // 动画完成后打印更新后的顶牌信息
+                const newTopCard = DataManager.instance.gameModel.topCard;
+                if (newTopCard) {
+                    console.log(`更新顶牌: ${this.getSuitName(newTopCard.config.CardSuit)}${this.getFaceName(newTopCard.config.CardFace)}`);
+                } else {
+                    console.log(`更新顶牌: 无`);
+                }
+            })
+            .start();
+    }
+
+    /**
+     * 更新顶牌信息
+     */
+    private updateTopCard(): void {
+        const currentTopCard = DataManager.instance.gameModel.topCard;
+        if (currentTopCard) {
+            console.log(`更新顶牌: ${this.getSuitName(currentTopCard.config.CardSuit)}${this.getFaceName(currentTopCard.config.CardFace)}`);
+        } else {
+            console.log(`更新顶牌: 无`);
+        }
+    }
+
+    /**
+     * 计算卡牌的目标位置
+     * @param cardData 卡牌数据
+     * @returns 目标位置 {x, y}
+     */
+    private calculateTargetPosition(cardData: CardModel): { x: number, y: number } {
+        const layoutConfig = GameConfig.instance.layoutConfig;
+        const handConf = layoutConfig?.handLayout;
+
+        // 获取手牌最后一张卡牌节点
+        const handCards = Array.from(DataManager.instance.gameModel.handCards.values());
+        const lastHandCard = handCards[handCards.length - 1];
+
+        if (lastHandCard) {
+            // 遍历tableArea的所有子节点，找到对应的卡牌节点
+            const children = this.tableArea.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                const cardId = (child as any).cardId;
+
+                if (cardId === lastHandCard.id) {
+                    // 找到手牌最后一张的节点
+                    // 获取手牌最后一张的位置（相对于tableArea）
+                    const position = child.getPosition();
+
+                    console.log(`手牌最后一张位置: (${position.x}, ${position.y})`);
+
+                    return { x: position.x, y: position.y };
+                }
+            }
+
+            console.log('未找到手牌最后一张的节点');
+        }
+
+        // 如果找不到手牌最后一张，返回配置中的默认位置
+        return {
+            x: handConf?.separateCardX ?? 200,
+            y: handConf?.separateCardY ?? 0
+        };
     }
 
     /**
@@ -313,6 +611,8 @@ export default class LevelController extends Component {
             console.log('撤销成功！');
             // 刷新所有卡牌显示
             this.refreshAllCardsDisplay();
+            // 更新顶牌信息
+            this.updateTopCard();
         } else {
             console.log('无法撤销');
         }
@@ -322,14 +622,7 @@ export default class LevelController extends Component {
      * 从节点获取卡牌数据
      */
     private getCardDataFromNode(cardNode: Node): CardModel | undefined {
-        // 通过节点属性获取卡牌ID
-        console.log('=== getCardDataFromNode 开始 ===');
-        console.log('节点名称:', cardNode.name);
-        console.log('节点完整信息:', cardNode);
-
-        // 尝试从节点属性中获取cardId
         const cardId = (cardNode as any).cardId;
-        console.log('从节点属性提取的cardId:', cardId);
 
         if (!cardId) {
             console.log('节点上没有cardId属性');
@@ -337,7 +630,6 @@ export default class LevelController extends Component {
         }
 
         const cardData = DataManager.instance.gameModel.getCardById(cardId);
-        console.log('获取到的cardData:', cardData);
 
         return cardData;
     }
@@ -355,9 +647,16 @@ export default class LevelController extends Component {
     private removeLastHandCardView(): void {
         const lastCard = DataManager.instance.gameModel.getLastHandCard();
         if (lastCard) {
-            const lastCardNode = this.handArea.getChildByPath(lastCard.id);
-            if (lastCardNode) {
-                lastCardNode.removeFromParent();
+            // 遍历tableArea的所有子节点，找到对应的卡牌节点
+            const children = this.tableArea.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                const cardId = (child as any).cardId;
+
+                if (cardId === lastCard.id) {
+                    child.removeFromParent();
+                    break;
+                }
             }
         }
     }
@@ -366,7 +665,20 @@ export default class LevelController extends Component {
      * 刷新手牌显示
      */
     private refreshHandCardsDisplay(): void {
-        this.handArea.removeAllChildren();
+        // 移除所有手牌节点
+        const children = this.tableArea.children;
+        for (let i = children.length - 1; i >= 0; i--) {
+            const child = children[i];
+            const cardId = (child as any).cardId;
+            const cardData = DataManager.instance.gameModel.handCards.get(cardId);
+
+            // 如果是手牌，则移除
+            if (cardData) {
+                child.removeFromParent();
+            }
+        }
+
+        // 重新创建手牌
         const totalHandCards = DataManager.instance.gameModel.handCards.size;
         const layoutConfig = GameConfig.instance.layoutConfig;
 

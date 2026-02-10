@@ -20,10 +20,15 @@
             "Classes\\controllers\\LevelController_bak.ts",
             "Classes\\managers\\DataManager.ts",
             "Classes\\models\\CardData.ts",
+            "Classes\\models\\CardModel.ts",
+            "Classes\\models\\GameModel.ts",
             "Classes\\models\\LayoutConfig.ts",
             "Classes\\models\\RuntimeCardData.ts",
+            "Classes\\models\\UndoModel.ts",
+            "Classes\\services\\CardService.ts",
             "Classes\\utils\\CardUtils.ts",
             "Classes\\views\\CardView.ts",
+            "resources\\configs\\GameConfig.ts",
             "scene.scene",
             "Classes\\README.md",
             "Prefab\\CardPrefab.prefab",
@@ -55,6 +60,7 @@
             "resources\\images\\big_red_J.png",
             "resources\\images\\big_red_K.png",
             "resources\\images\\big_red_Q.png",
+            "resources\\images\\CardArea.png",
             "resources\\images\\CardPrefab.prefab",
             "resources\\images\\card_general.png",
             "resources\\images\\club.png",
@@ -89,10 +95,7 @@
             "resources\\images\\small_red_K.png",
             "resources\\images\\small_red_Q.png",
             "resources\\images\\spade.png",
-            "resources\\levels\\level_1.json",
-            "Classes\\models\\CardModel.ts",
-            "Classes\\models\\GameModel.ts",
-            "Classes\\models\\UndoModel.ts"
+            "resources\\levels\\level_1.json"
         ]
     }
 }

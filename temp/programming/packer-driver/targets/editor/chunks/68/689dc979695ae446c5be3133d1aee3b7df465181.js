@@ -43,6 +43,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           this._tableCards = new Map();
           // 手牌
           this._handCards = new Map();
+          // 顶牌（手牌区最右边的一张）
+          this._topCard = null;
+          // 备用牌（手牌区除了顶牌之外的牌）
+          this._reserveCards = [];
+          // 初始备用牌（关卡开始时除了顶牌的所有牌，固定不变）
+          this._initialReserveCards = [];
         }
         /**
          * 初始化游戏数据
@@ -78,7 +84,14 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
               this._handCards.set(card.id, card);
 
               this._allCards.set(card.id, card);
-            });
+            }); // 设置初始顶牌和初始备用牌
+
+            const handCards = Array.from(this._handCards.values());
+
+            if (handCards.length > 0) {
+              this._topCard = handCards[handCards.length - 1];
+              this._initialReserveCards = handCards.slice(0, handCards.length - 1);
+            }
           }
         }
         /**
@@ -133,6 +146,59 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         getLastHandCard() {
           const cards = Array.from(this._handCards.values());
           return cards[cards.length - 1];
+        }
+        /**
+         * 获取顶牌
+         */
+
+
+        get topCard() {
+          return this._topCard;
+        }
+        /**
+         * 设置顶牌
+         */
+
+
+        set topCard(card) {
+          this._topCard = card;
+        }
+        /**
+         * 获取备用牌
+         */
+
+
+        get reserveCards() {
+          return this._reserveCards;
+        }
+        /**
+         * 设置备用牌
+         */
+
+
+        set reserveCards(cards) {
+          this._reserveCards = cards;
+        }
+        /**
+         * 更新顶牌和备用牌
+         * 顶牌是最后移动到顶牌位置的卡牌，备用牌是关卡开始时除了顶牌的所有牌
+         */
+
+
+        updateTopAndReserveCards() {
+          // 顶牌已经通过setTopCard方法设置，这里不需要重新计算
+          // 备用牌是初始备用牌，固定不变
+          console.log('updateTopAndReserveCards 被调用');
+          console.log(`当前顶牌: ${this._topCard ? this._topCard.config.CardFace : '无'}`);
+          console.log(`初始备用牌数量: ${this._initialReserveCards.length}`);
+
+          this._initialReserveCards.forEach((card, index) => {
+            console.log(`初始备用牌[${index}]: ${card.config.CardSuit}${card.config.CardFace}`);
+          }); // 备用牌是初始备用牌，固定不变
+
+
+          this._reserveCards = [...this._initialReserveCards];
+          console.log(`更新后备用牌数量: ${this._reserveCards.length}`);
         }
         /**
          * 判断两张牌是否可以匹配（点数绝对值差1）
@@ -241,7 +307,31 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
                 this._tableCards.delete(id);
               }
             }
-          });
+          }); // 恢复后重新计算顶牌和备用牌
+
+          this.recalculateTopAndReserveCards();
+        }
+        /**
+         * 重新计算顶牌和备用牌
+         */
+
+
+        recalculateTopAndReserveCards() {
+          const handCards = Array.from(this._handCards.values()); // 按zIndex排序
+
+          handCards.sort((a, b) => a.zIndex - b.zIndex);
+
+          if (handCards.length > 0) {
+            // 最后一张是顶牌
+            this._topCard = handCards[handCards.length - 1]; // 其余的是备用牌
+
+            this._reserveCards = handCards.slice(0, handCards.length - 1);
+          } else {
+            this._topCard = null;
+            this._reserveCards = [];
+          }
+
+          console.log(`重新计算顶牌和备用牌 - 顶牌: ${this._topCard ? this._topCard.config.CardSuit + this._topCard.config.CardFace : '无'}, 备用牌数量: ${this._reserveCards.length}`);
         }
 
       });

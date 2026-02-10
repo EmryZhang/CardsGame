@@ -11,10 +11,12 @@
         "cardsPerColumn": 3
     },
     "handLayout": {
-        "startX": -100,
-        "startY": -300,
-        "horizontalSpacing": 120,
-        "totalCards": 3
+        "mode": "stack_last_separate",
+        "stackStartX": -350,
+        "stackStartY": -750,
+        "stackSpacingX": 100,
+        "separateCardX": 350,
+        "separateCardY": -750
     },
     "reserveLayout": {
         "startX": -300,
